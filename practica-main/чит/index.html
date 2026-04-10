@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#161b22" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Spectra — Чтение</title>
+    
+    <!-- FONTS & ICONS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light" data-reading-theme="classic" data-font="inter" data-font-size="medium" 
+      data-line-height="normal" data-paragraph-spacing="normal" data-margins="normal" 
+      data-align="justify" data-hyphens="auto" data-brightness="normal">
+
+    <!-- ХЕДЕР ЧТЕНИЯ -->
+    <header class="reader-header">
+        <button class="btn-icon" onclick="toggleBookmarkPanel()" title="Закладки">
+            <i class="fas fa-bookmark"></i>
+        </button>
+        
+        <div class="book-info">
+            <span class="book-title-header" id="bookTitle">Название книги 1</span>
+            <span class="book-chapter" id="bookChapter">Глава 1</span>
+        </div>
+        
+        <div class="header-actions">
+            <button class="btn-icon" onclick="openComments()" title="Комментарии">
+                <i class="fas fa-comment"></i>
+                <span style="font-size: 0.7rem; margin-left: 2px;" id="commentCount">3</span>
+            </button>
+            <button class="btn-icon" onclick="toggleSettings()" title="Настройки чтения">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+            <button class="btn-icon" onclick="window.location.href='profile.html'" title="Профиль">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ПРОГРЕСС ЧТЕНИЯ -->
+    <div class="reading-progress" id="progressContainer" onclick="jumpToPosition(event)">
+        <div class="progress-bar" id="progressBar" style="width: 24%;">
+            <span class="progress-tooltip" id="progressTooltip">24% • стр. 48/200</span>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР ЧТЕНИЯ -->
+    <div class="reader-container">
+        <div class="reader-margin"></div>
+        
+        <div class="reader-content">
+            <div class="book-content" id="bookContent">
+                <h1>Название книги 1</h1>
+                <h2>Глава 1. Начало пути</h2>
+                
+                <p>Ветер тихо шелестел листвой старых кленов, растущих вдоль университетской аллеи. Алексей стоял у окна библиотеки и смотрел, как первые осенние листья медленно кружатся в воздухе, прежде чем упасть на влажный асфальт. В руках он держал потрепанный том стихов Серебряного века — книга, доставшаяся ему от деда.</p>
+                
+                <p><span class="comment-highlight" data-comment-id="1">— Вы тоже любите Мандельштама? — раздался тихий голос за спиной.<span class="comment-badge">💬 1</span></span></p>
+                
+                <p>Алексей обернулся. В проеме дверей стояла девушка в длинном сером пальто, с мокрым зонтом в руках. Капли дождя блестели в ее темных волосах.</p>
+                
+                <p><span class="bookmarked" data-bookmark-id="1" data-bookmark-color="#fbbf24">— Это мой дедушкин экземпляр, — ответил он, открывая титульный лист. — С его пометками.</span></p>
+                
+                <p>Она сделала шаг вперед, рассматривая пожелтевшие страницы. "Вот здесь, на полях, он написал '1915 год, Париж'. Вы знаете, что Мандельштам тогда..."</p>
+                
+                <p>Их разговор продолжился до самого вечера. Библиотекарь уже дважды намекала, что пора закрывать, но они не замечали времени. Так началась история, которую Алексей будет вспоминать много лет спустя, перечитывая те же самые стихи.</p>
+                
+                <p>— Знаете, — сказала она уже на крыльце, подставляя лицо мелкому дождю, — иногда мне кажется, что книги сами находят своих читателей. Эта книга ждала вас. А я... я, наверное, ждала встречи с вами.</p>
+                
+                <p>В темноте осеннего вечера зажглись фонари, и их свет отражался в лужах тысячами осколков. Алексей молчал, боясь спугнуть этот момент. Где-то вдалеке прокричала ночная птица.</p>
+                
+                <p>— Давайте я провожу вас, — наконец произнес он.</p>
+                
+                <p>Она кивнула, и они пошли вдоль аллеи, не замечая дождя. Через неделю Алексей узнает, что ее зовут Елена. Через месяц они вместе поедут в Санкт-Петербург искать ту самую квартиру на Фонтанке. А через год он сделает ей предложение, используя вместо кольца старую закладку из дедушкиной книги.</p>
+                
+                <p class="comment-highlight" data-comment-id="2">Но это будет потом. А пока — только дождь, фонари, и чувство, что жизнь только начинается.<span class="comment-badge">💬 2</span></p>
+            </div>
+        </div>
+        
+        <div class="reader-margin"></div>
+    </div>
+
+    <!-- ПАНЕЛЬ НАСТРОЕК -->
+    <div id="settingsPanel" class="settings-panel">
+        <div class="settings-header">
+            <h2><i class="fas fa-sliders-h" style="margin-right: 8px;"></i> Настройки</h2>
+            <button class="btn-icon" onclick="toggleSettings()" style="width: 36px; height: 36px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="settings-content">
+            <div class="settings-section">
+                <div class="settings-section-title">
+                    <i class="fas fa-sun"></i>
+                    <span>Яркость</span>
+                </div>
+                <div class="settings-row">
+                    <span class="settings-label">Освещение</span>
+                    <div class="settings-options">
+                        <button class="settings-option" onclick="setBrightness('normal')">Авто</button>
+                        <button class="settings-option" onclick="setBrightness('low')">Тускло</button>
+                        <button class="settings-option active" onclick="setBrightness('high')">Ярко</button>
+                    </div>
+                </div>
+                <input type="range" class="range-slider" id="brightnessSlider" min="30" max="150" value="100" step="1" oninput="updateBrightness(this.value)">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-size: 0.7rem; color: var(--text-tertiary);"><i class="fas fa-moon"></i></span>
+                    <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600;" id="brightnessValue">100%</span>
+                    <span style="font-size: 0.7rem; color: var(--text-tertiary);"><i class="fas fa-sun"></i></span>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title">
+                    <i class="fas fa-text-height"></i>
+                    <span>Размер и поля</span>
+                </div>
+                
+                <div class="settings-row">
+                    <span class="settings-label">Размер шрифта</span>
+                    <div class="settings-options">
+                        <button class="settings-option" onclick="setFontSize('small')">А</button>
+                        <button class="settings-option active" onclick="setFontSize('medium')">А</button>
+                        <button class="settings-option" onclick="setFontSize('large')">А</button>
+                        <button class="settings-option" onclick="setFontSize('xlarge')">А+</button>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <span class="settings-label">Высота строк</span>
+                    <div class="settings-options">
+                        <button class="settings-option" onclick="setLineHeight('small')">Меньше</button>
+                        <button class="settings-option active" onclick="setLineHeight('normal')">Средне</button>
+                        <button class="settings-option" onclick="setLineHeight('large')">Больше</button>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <span class="settings-label">Поля</span>
+                    <div class="settings-options">
+                        <button class="settings-option" onclick="setMargins('narrow')">Узкие</button>
+                        <button class="settings-option active" onclick="setMargins('normal')">Широкие</button>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <span class="settings-label">Отступы между абзацами</span>
+                    <div class="settings-options">
+                        <button class="settings-option" onclick="setParagraphSpacing('small')">Мал.</button>
+                        <button class="settings-option active" onclick="setParagraphSpacing('normal')">Сред.</button>
+                        <button class="settings-option" onclick="setParagraphSpacing('large')">Бол.</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title">
+                    <i class="fas fa-font"></i>
+                    <span>Шрифт</span>
+                </div>
+                <div class="settings-row">
+                    <div class="settings-options" style="width: 100%; justify-content: space-between;">
+                        <button class="settings-option" style="flex: 1;" onclick="setFont('inter')">Inter</button>
+                        <button class="settings-option" style="flex: 1;" onclick="setFont('merriweather')">Merriweather</button>
+                        <button class="settings-option active" style="flex: 1;" onclick="setFont('arial')">Arial</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title">
+                    <i class="fas fa-book-open"></i>
+                    <span>Режим чтения</span>
+                </div>
+                
+                <div class="settings-row">
+                    <span class="settings-label">Ориентация</span>
+                    <div class="settings-options">
+                        <button class="settings-option active" onclick="setOrientation('vertical')">
+                            <i class="fas fa-arrows-alt-v"></i> Вертикальный
+                        </button>
+                        <button class="settings-option" onclick="setOrientation('horizontal')">
+                            <i class="fas fa-arrows-alt-h"></i> Горизонтальный
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <span class="settings-label">Выравнивание</span>
+                    <div class="settings-options">
+                        <button class="settings-option" onclick="setTextAlign('left')">По левому</button>
+                        <button class="settings-option active" onclick="setTextAlign('justify')">По ширине</button>
+                        <button class="settings-option" onclick="setTextAlign('right')">По правому</button>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <span class="settings-label">Переносы</span>
+                    <div class="settings-options">
+                        <button class="settings-option active" onclick="setHyphens('auto')">Вкл</button>
+                        <button class="settings-option" onclick="setHyphens('none')">Выкл</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title">
+                    <i class="fas fa-palette"></i>
+                    <span>Тема</span>
+                </div>
+                
+                <div class="theme-grid">
+                    <div class="theme-card active" onclick="setReadingTheme('classic')">
+                        <div class="theme-preview" style="background: #faf7f2; border: 1px solid #e6e0d4;"></div>
+                        <span class="theme-name">Классика</span>
+                    </div>
+                    <div class="theme-card" onclick="setReadingTheme('sepia')">
+                        <div class="theme-preview" style="background: #fbf7e9; border: 1px solid #dcd0c0;"></div>
+                        <span class="theme-name">Сепия</span>
+                    </div>
+                    <div class="theme-card" onclick="setReadingTheme('night')">
+                        <div class="theme-preview" style="background: #1a1e24; border: 1px solid #3a4450;"></div>
+                        <span class="theme-name">Ночь</span>
+                    </div>
+                    <div class="theme-card" onclick="setReadingTheme('forest')">
+                        <div class="theme-preview" style="background: #e8f0e0; border: 1px solid #b8d0b0;"></div>
+                        <span class="theme-name">Лес</span>
+                    </div>
+                    <div class="theme-card" onclick="setReadingTheme('radiation')">
+                        <div class="theme-preview" style="background: radial-gradient(circle, #1a3a2a, #0c1414);"></div>
+                        <span class="theme-name">Радиация</span>
+                    </div>
+                    <div class="theme-card" onclick="openCustomThemeModal()">
+                        <div class="theme-preview" style="background: var(--gradient-sunset);"></div>
+                        <span class="theme-name">Своя тема</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-register" onclick="resetReadingSettings()" style="margin-top: 0.5rem; background: var(--surface); color: var(--text-tertiary); box-shadow: none;">
+                <i class="fas fa-undo-alt"></i> Сбросить настройки
+            </button>
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ ЗАКЛАДОК -->
+    <div id="bookmarkPanel" class="bookmark-panel">
+        <div class="bookmark-header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 1.4rem; font-weight: 700;">
+                    <i class="fas fa-bookmark" style="color: var(--primary); margin-right: 8px;"></i> Закладки
+                </h2>
+                <button class="btn-icon" onclick="toggleBookmarkPanel()" style="width: 36px; height: 36px;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <button class="btn-register" onclick="openBookmarkModal()" style="margin-top: 1rem; padding: 0.7rem;">
+                <i class="fas fa-plus"></i> Создать закладку
+            </button>
+        </div>
+        
+        <div class="bookmark-list" id="bookmarkList">
+            <div class="bookmark-item" onclick="jumpToBookmark(1)">
+                <div class="bookmark-title">Глава 1. Начало пути</div>
+                <div class="bookmark-meta">
+                    <span><i class="fas fa-bookmark" style="color: #fbbf24;"></i> стр. 12</span>
+                    <span>15.03.2024</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.3rem;">
+                    "Это мой дедушкин экземпляр..."
+                </div>
+            </div>
+            
+            <div class="bookmark-item" onclick="jumpToBookmark(2)">
+                <div class="bookmark-title">Глава 1. Начало пути</div>
+                <div class="bookmark-meta">
+                    <span><i class="fas fa-bookmark" style="color: #ef4444;"></i> стр. 15</span>
+                    <span>15.03.2024</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-tertiary);">
+                    "...книги сами находят своих читателей..."
+                </div>
+            </div>
+            
+            <div class="bookmark-item" onclick="jumpToBookmark(3)">
+                <div class="bookmark-title">Глава 1. Начало пути</div>
+                <div class="bookmark-meta">
+                    <span><i class="fas fa-bookmark" style="color: #10b981;"></i> стр. 18</span>
+                    <span>16.03.2024</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-tertiary);">
+                    "...жизнь только начинается..."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ КОММЕНТАРИЕВ -->
+    <div id="commentsPanel" class="comments-panel">
+        <div class="comments-header">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <div style="background: var(--gradient-primary); padding: 0.5rem 1rem; border-radius: var(--radius-full); color: white; font-weight: 600;">
+                    <i class="fas fa-comment"></i> Комментарии <span id="commentsHeaderCount">(3)</span>
+                </div>
+                <span style="color: var(--text-tertiary); font-size: 0.8rem;">к Главе 1</span>
+            </div>
+            <button class="btn-icon" onclick="closeComments()" style="width: 36px; height: 36px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="comment-input-group">
+            <input type="text" id="commentInput" class="comment-input" placeholder="Напишите комментарий...">
+            <button class="btn-send" onclick="addComment()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        
+        <div class="comments-list" id="commentsList">
+            <div class="comment-item">
+                <div class="comment-author">
+                    <span class="comment-avatar">А</span>
+                    <span style="font-weight: 600; font-size: 0.8rem;">Анна</span>
+                    <span style="font-size: 0.65rem; color: var(--text-tertiary);">5 мин назад</span>
+                </div>
+                <div class="comment-text">Очень атмосферное начало, сразу вспомнила свои студенческие годы в библиотеке.</div>
+            </div>
+            
+            <div class="comment-item">
+                <div class="comment-author">
+                    <span class="comment-avatar">Д</span>
+                    <span style="font-weight: 600; font-size: 0.8rem;">Дмитрий</span>
+                    <span style="font-size: 0.65rem; color: var(--text-tertiary);">15 мин назад</span>
+                </div>
+                <div class="comment-text">Интересно, будут ли еще отсылки к поэзии Серебряного века в следующих главах?</div>
+            </div>
+            
+            <div class="comment-item">
+                <div class="comment-author">
+                    <span class="comment-avatar">М</span>
+                    <span style="font-weight: 600; font-size: 0.8rem;">Мария</span>
+                    <span style="font-size: 0.65rem; color: var(--text-tertiary);">1 час назад</span>
+                </div>
+                <div class="comment-text">"книги сами находят своих читателей" — какая красивая мысль. Сохранила в цитаты.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА СОЗДАНИЯ ЗАКЛАДКИ -->
+    <div id="bookmarkModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeBookmarkModal()">&times;</button>
+            
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background: var(--gradient-primary); padding: 0.8rem; border-radius: 16px;">
+                    <i class="fas fa-bookmark" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                <div>
+                    <h2 style="font-size: 1.5rem; font-weight: 700;">Создать закладку</h2>
+                    <p style="color: var(--text-tertiary); font-size: 0.8rem;">Название книги 1 • Глава 1</p>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary);">
+                    <i class="fas fa-heading" style="margin-right: 6px; color: var(--primary);"></i> Название закладки
+                </label>
+                <input type="text" id="bookmarkNameInput" class="comment-input" placeholder="Например: Важный момент" value="Глава 1. Начало пути">
+            </div>
+            
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary);">
+                    <i class="fas fa-page" style="margin-right: 6px; color: var(--primary);"></i> Страница
+                </label>
+                <input type="number" id="bookmarkPageInput" class="comment-input" placeholder="Номер страницы" value="48" min="1">
+            </div>
+            
+            <div style="margin-bottom: 1.8rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary);">
+                    <i class="fas fa-palette" style="margin-right: 6px; color: var(--primary);"></i> Цвет закладки
+                </label>
+                <div class="color-picker">
+                    <div class="color-option" style="background: #fbbf24;" onclick="selectBookmarkColor('#fbbf24', this)"></div>
+                    <div class="color-option" style="background: #ef4444;" onclick="selectBookmarkColor('#ef4444', this)"></div>
+                    <div class="color-option" style="background: #10b981;" onclick="selectBookmarkColor('#10b981', this)"></div>
+                    <div class="color-option" style="background: #6366f1;" onclick="selectBookmarkColor('#6366f1', this)"></div>
+                    <div class="color-option active" style="background: #8b5cf6;" onclick="selectBookmarkColor('#8b5cf6', this)"></div>
+                    <div class="color-option" style="background: #ec4899;" onclick="selectBookmarkColor('#ec4899', this)"></div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn-register" onclick="closeBookmarkModal()" style="background: var(--surface); color: var(--text-tertiary); border: 1px solid var(--border); box-shadow: var(--shadow-xs); flex: 1;">
+                    <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <i class="fas fa-times"></i> Отмена
+                    </span>
+                </button>
+                <button class="btn-register" onclick="saveBookmark()" style="background: var(--gradient-primary); color: white; border: none; box-shadow: 0 8px 20px hsla(238, 83%, 67%, 0.4); flex: 1.5;">
+                    <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <i class="fas fa-save"></i> Сохранить
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА СОЗДАНИЯ СВОЕЙ ТЕМЫ -->
+    <div id="customThemeModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCustomThemeModal()">&times;</button>
+            
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background: var(--gradient-sunset); padding: 0.8rem; border-radius: 16px;">
+                    <i class="fas fa-palette" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                <h2 style="font-size: 1.5rem; font-weight: 700;">Создать тему</h2>
+            </div>
+            
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-secondary);">
+                    Введите название темы
+                </label>
+                <input type="text" id="themeNameInput" class="comment-input" placeholder="Например: Радиационная точка">
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+                <div>
+                    <label style="display: block; margin-bottom: 0.3rem; font-size: 0.8rem; color: var(--text-tertiary);">Фон</label>
+                    <input type="color" id="themeBgColor" value="#0a1a1a" style="width: 100%; height: 50px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.3rem; font-size: 0.8rem; color: var(--text-tertiary);">Текст</label>
+                    <input type="color" id="themeTextColor" value="#a8ffc0" style="width: 100%; height: 50px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.3rem; font-size: 0.8rem; color: var(--text-tertiary);">Акцент</label>
+                    <input type="color" id="themeAccentColor" value="#4aff8c" style="width: 100%; height: 50px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.3rem; font-size: 0.8rem; color: var(--text-tertiary);">Градиент</label>
+                    <select id="themeGradient" style="width: 100%; height: 50px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); padding: 0 0.5rem;">
+                        <option value="none">Нет</option>
+                        <option value="radial">Радиальный</option>
+                        <option value="linear">Линейный</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 0.8rem; margin-bottom: 1.8rem; flex-wrap: wrap;">
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="themeWidth"> <span style="font-size: 0.9rem;">ширина</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="themeHeight"> <span style="font-size: 0.9rem;">высота</span>
+                </label>
+            </div>
+            
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn-register" onclick="closeCustomThemeModal()" style="background: var(--surface); color: var(--text-tertiary); border: 1px solid var(--border); box-shadow: var(--shadow-xs); flex: 1;">
+                    <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <i class="fas fa-times"></i> Отмена
+                    </span>
+                </button>
+                <button class="btn-register" onclick="applyCustomTheme()" style="background: var(--gradient-primary); color: white; border: none; box-shadow: 0 8px 20px hsla(238, 83%, 67%, 0.4); flex: 1.5;">
+                    <span style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <i class="fas fa-check-circle"></i> Применить тему
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- УВЕДОМЛЕНИЕ -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <span class="notification-title">SPECTRA</span>
+            <span class="notification-message" id="notificationMessage">Настройки сохранены</span>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+</body>
+</html>
