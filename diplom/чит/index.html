@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Spectra — Чтение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light" data-reading-theme="classic" data-font="inter" data-margins="normal" data-align="justify">
+
+    <header class="reader-header">
+        <button class="btn-icon" onclick="toggleBookmarkPanel()"><i class="fas fa-bookmark"></i></button>
+        <div class="book-info">
+            <span class="book-title-header">Название книги 1</span>
+            <span class="book-chapter">Глава 1</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn-icon" onclick="openComments()">
+                <i class="fas fa-comment"></i>
+                <span style="font-size: 0.7rem; margin-left: 2px;" id="commentCount">3</span>
+            </button>
+            <button class="btn-icon" onclick="toggleSettings()"><i class="fas fa-sliders-h"></i></button>
+        </div>
+    </header>
+
+    <div class="reading-progress" id="progressContainer" onclick="jumpToPosition(event)">
+        <div class="progress-bar" id="progressBar" style="width: 24%;"></div>
+    </div>
+
+    <div class="reader-container">
+        <div class="reader-content">
+            <div class="book-content" id="bookContent">
+                <h1>Название книги 1</h1>
+                <h2>Глава 1. Начало пути</h2>
+                <p>Ветер тихо шелестел листвой старых кленов, растущих вдоль университетской аллеи. Алексей стоял у окна библиотеки и смотрел, как первые осенние листья медленно кружатся в воздухе. В руках он держал потрепанный том стихов Серебряного века — книга, доставшаяся ему от деда.</p>
+                <p>— Вы тоже любите Мандельштама? — раздался тихий голос за спиной.</p>
+                <p>— Это мой дедушкин экземпляр, — ответил он, открывая титульный лист. — С его пометками.</p>
+                <p>Их разговор продолжился до самого вечера. Библиотекарь уже дважды намекала, что пора закрывать, но они не замечали времени. Так началась история, которую Алексей будет вспоминать много лет спустя.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ НАСТРОЕК -->
+    <div id="settingsPanel" class="settings-panel">
+        <div class="settings-header">
+            <h2>Настройки</h2>
+            <button class="btn-icon" onclick="toggleSettings()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="settings-content">
+            <div class="settings-section">
+                <div class="settings-section-title"><i class="fas fa-text-height"></i> Вид текста</div>
+                
+                <!-- ПРОИЗВОЛЬНЫЙ ШРИФТ -->
+                <div class="settings-row">
+                    <span class="settings-label">Размер шрифта</span>
+                    <input type="range" class="range-slider" id="fontSlider" min="12" max="42" value="18" oninput="changeFontSize(this.value)">
+                    <span class="range-value" id="fontSizeVal">18px</span>
+                </div>
+
+                <!-- ДВЕ СТРАНИЦЫ -->
+                <div class="settings-row">
+                    <span class="settings-label">Колонки</span>
+                    <div class="settings-options">
+                        <button class="settings-option active" id="btnCol1" onclick="setColumns(1)">Одна</button>
+                        <button class="settings-option" id="btnCol2" onclick="setColumns(2)">Две</button>
+                    </div>
+                </div>
+
+                <!-- ШИРИНА ПОЛЕЙ -->
+                <div class="settings-row">
+                    <span class="settings-label">Ширина контента</span>
+                    <input type="range" class="range-slider" min="400" max="1200" value="800" oninput="changeContentWidth(this.value)">
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <div class="settings-section-title"><i class="fas fa-font"></i> Шрифт</div>
+                <div class="settings-options">
+                    <button class="settings-option" onclick="setFont('inter')">Inter</button>
+                    <button class="settings-option" onclick="setFont('merriweather')">Serif</button>
+                </div>
+            </div>
+
+            <div class="theme-grid">
+                <div class="theme-card" onclick="setReadingTheme('classic')">Классика</div>
+                <div class="theme-card" onclick="setReadingTheme('night')">Ночь</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ ЗАКЛАДОК -->
+    <div id="bookmarkPanel" class="bookmark-panel">
+        <div class="bookmark-header">
+            <h3>Закладки</h3>
+            <button class="btn-register" onclick="openBookmarkModal()"><i class="fas fa-plus"></i> Создать</button>
+        </div>
+        <div class="bookmark-list" id="bookmarkList"></div>
+    </div>
+
+    <!-- ПАНЕЛЬ КОММЕНТАРИЕВ (СЛЕВА) -->
+    <div id="commentsPanel" class="comments-panel left-side">
+        <div class="comments-header">
+            <h3>Комментарии</h3>
+            <button class="btn-icon" onclick="closeComments()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="comment-input-group">
+            <textarea id="commentInput" class="comment-input" placeholder="Напишите комментарий..." maxlength="300" oninput="updateCharCount()"></textarea>
+            <div class="comment-meta-info">
+                <span id="charCounter">0 / 300</span>
+                <button class="btn-send" onclick="addComment()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div class="comments-list" id="commentsList"></div>
+    </div>
+
+    <!-- МОДАЛКА ЗАКЛАДКИ -->
+    <div id="bookmarkModal" class="modal">
+        <div class="modal-content">
+            <h2 id="bmModalTitle">Создать закладку</h2>
+            <input type="text" id="bookmarkNameInput" class="comment-input" placeholder="Название">
+            <input type="number" id="bookmarkPageInput" class="comment-input" placeholder="Страница">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn-register" style="background:#eee; color:#333" onclick="closeBookmarkModal()">Отмена</button>
+                <button class="btn-register" onclick="saveBookmark()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <span class="notification-message" id="notificationMessage">Готово</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
