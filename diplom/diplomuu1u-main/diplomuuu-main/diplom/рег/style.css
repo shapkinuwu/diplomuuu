@@ -1,0 +1,738 @@
+/* ========== ПОДКЛЮЧАЕМ СТИЛИ SPECTRA ========== */
+:root {
+    /* ЦВЕТА — СВЕТЛАЯ ТЕМА */
+    --primary-h: 238;
+    --primary-s: 83%;
+    --primary-l: 67%;
+    --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+    --primary-light: hsl(var(--primary-h), 85%, 75%);
+    --primary-dark: hsl(var(--primary-h), 70%, 55%);
+    --primary-soft: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
+    --primary-glow: 0 0 30px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.3);
+    
+    --secondary-h: 199;
+    --secondary-s: 89%;
+    --secondary-l: 48%;
+    --secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
+    
+    --success-h: 152;
+    --success-s: 69%;
+    --success-l: 39%;
+    --success: hsl(var(--success-h), var(--success-s), var(--success-l));
+    
+    --danger-h: 0;
+    --danger-s: 84%;
+    --danger-l: 60%;
+    --danger: hsl(var(--danger-h), var(--danger-s), var(--danger-l));
+    
+    /* БАЗОВЫЕ ЦВЕТА */
+    --bg-h: 240;
+    --bg-s: 20%;
+    --bg-l: 99%;
+    --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+    --bg-gradient: radial-gradient(circle at 0% 0%, hsl(240, 50%, 98%), hsl(240, 20%, 99%));
+    
+    --surface-h: 0;
+    --surface-s: 0%;
+    --surface-l: 100%;
+    --surface: hsla(var(--surface-h), var(--surface-s), var(--surface-l), 0.8);
+    --surface-solid: hsl(var(--surface-h), var(--surface-s), var(--surface-l));
+    --surface-hover: hsl(220, 50%, 97%);
+    
+    --text-primary-h: 222;
+    --text-primary-s: 47%;
+    --text-primary-l: 11%;
+    --text-primary: hsl(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l));
+    --text-secondary: hsl(215, 25%, 27%);
+    --text-tertiary: hsl(215, 16%, 47%);
+    --text-muted: hsl(215, 20%, 65%);
+    --text-inverse: hsl(0, 0%, 100%);
+    
+    --border-h: 210;
+    --border-s: 20%;
+    --border-l: 90%;
+    --border: hsl(var(--border-h), var(--border-s), var(--border-l));
+    --border-light: hsla(var(--border-h), var(--border-s), var(--border-l), 0.6);
+    --border-active: var(--primary);
+    
+    /* ТЕНИ */
+    --shadow-xs: 0 2px 8px hsla(0, 0%, 0%, 0.02);
+    --shadow-sm: 0 4px 16px hsla(0, 0%, 0%, 0.02);
+    --shadow-md: 0 8px 24px hsla(0, 0%, 0%, 0.03);
+    --shadow-lg: 0 20px 32px -8px hsla(0, 0%, 0%, 0.04);
+    --shadow-xl: 0 30px 48px -12px hsla(0, 0%, 0%, 0.08);
+    --shadow-glow: 0 0 0 2px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.1), 0 8px 20px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.15);
+    
+    /* ГРАДИЕНТЫ */
+    --gradient-primary: linear-gradient(145deg, hsl(238, 83%, 67%), hsl(258, 70%, 65%));
+    --gradient-success: linear-gradient(145deg, hsl(152, 69%, 39%), hsl(162, 70%, 35%));
+    --gradient-sunset: linear-gradient(135deg, hsl(238, 83%, 67%), hsl(280, 70%, 65%), hsl(320, 80%, 65%));
+    --gradient-max: linear-gradient(135deg, #38b6ff, #4e6aff, #a059ff, #d360ff);
+    
+    /* РАДИУСЫ */
+    --radius-xs: clamp(4px, 1vw, 8px);
+    --radius-sm: clamp(8px, 1.5vw, 12px);
+    --radius-md: clamp(12px, 2vw, 16px);
+    --radius-lg: clamp(16px, 3vw, 24px);
+    --radius-xl: clamp(20px, 4vw, 32px);
+    --radius-full: 9999px;
+    
+    /* ЭФФЕКТЫ */
+    --blur: blur(20px);
+    --blur-strong: blur(40px);
+    
+    /* АНИМАЦИИ */
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* ШРИФТ */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ========== ТЁМНАЯ ТЕМА ========== */
+body[data-theme="dark"] {
+    --bg-h: 225;
+    --bg-s: 25%;
+    --bg-l: 9%;
+    --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+    --bg-gradient: radial-gradient(circle at 30% 30%, hsl(225, 20%, 12%), hsl(225, 25%, 7%));
+    
+    --surface-h: 220;
+    --surface-s: 20%;
+    --surface-l: 14%;
+    --surface: hsla(var(--surface-h), var(--surface-s), var(--surface-l), 0.85);
+    --surface-solid: hsl(var(--surface-h), var(--surface-s), var(--surface-l));
+    --surface-hover: hsl(220, 18%, 20%);
+    
+    --text-primary-h: 210;
+    --text-primary-s: 40%;
+    --text-primary-l: 96%;
+    --text-primary: hsl(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l));
+    --text-secondary: hsl(210, 30%, 90%);
+    --text-tertiary: hsl(210, 20%, 80%);
+    
+    --border-h: 215;
+    --border-s: 20%;
+    --border-l: 25%;
+    --border: hsl(var(--border-h), var(--border-s), var(--border-l));
+    --border-light: hsla(var(--border-h), var(--border-s), var(--border-l), 0.6);
+    
+    --shadow-xs: 0 2px 8px hsla(0, 0%, 0%, 0.5);
+    --shadow-sm: 0 4px 16px hsla(0, 0%, 0%, 0.6);
+    --shadow-md: 0 8px 24px hsla(0, 0%, 0%, 0.7);
+    --shadow-lg: 0 20px 32px -8px hsla(0, 0%, 0%, 0.8);
+    --shadow-xl: 0 30px 48px -12px hsla(0, 0%, 0%, 0.9);
+    --shadow-glow: 0 0 0 2px hsla(var(--primary-h), 70%, 70%, 0.2), 0 8px 30px hsla(var(--primary-h), 70%, 70%, 0.25);
+    
+    --primary: hsl(230, 80%, 74%);
+    --primary-light: hsl(230, 85%, 82%);
+}
+
+/* ========== СБРОС ========== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    background-image: var(--bg-gradient);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.2s ease;
+    padding: 1rem;
+}
+
+/* ========== ОСНОВНАЯ КАРТОЧКА РЕГИСТРАЦИИ ========== */
+.registration-card {
+    background: var(--surface);
+    backdrop-filter: var(--blur-strong);
+    -webkit-backdrop-filter: var(--blur-strong);
+    border-radius: var(--radius-xl);
+    padding: clamp(1.8rem, 5vw, 2.5rem);
+    width: min(450px, 100%);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-light);
+    text-align: center;
+    transition: var(--transition-base);
+    animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.registration-card:hover {
+    box-shadow: var(--shadow-2xl, var(--shadow-xl));
+    border-color: var(--border-active);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Логотип Spectra */
+.logo {
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
+    font-weight: 800;
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.logo::after {
+    content: '✦';
+    position: absolute;
+    top: -0.2em;
+    right: -0.6em;
+    font-size: 0.7em;
+    color: var(--primary);
+    -webkit-text-fill-color: var(--primary);
+    opacity: 0.7;
+    animation: twinkle 2s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.subtitle {
+    color: var(--text-tertiary);
+    font-size: 0.95rem;
+    margin-bottom: 1.8rem;
+    font-weight: 400;
+}
+
+/* ========== ФОРМА ========== */
+.form-group {
+    margin-bottom: 1.8rem;
+    position: relative;
+}
+
+/* ПОЛЯ ВВОДА — КИНЕМАТОГРАФИЧНЫЙ СТИЛЬ */
+input {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-light);
+    background: var(--surface-solid);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    transition: var(--transition-base);
+    outline: none;
+}
+
+.password-input {
+    padding-right: 3.2rem;
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-glow);
+    background: var(--surface-solid);
+}
+
+input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Валидация */
+input.invalid {
+    border-color: var(--danger);
+    background: rgba(var(--danger-h), var(--danger-s), var(--danger-l), 0.05);
+}
+
+input.valid {
+    border-color: var(--success);
+    background: rgba(var(--success-h), var(--success-s), var(--success-l), 0.05);
+}
+
+/* ИНДИКАТОР ВАЛИДАЦИИ (ГАЛОЧКА/КРЕСТИК) */
+.validation-icon {
+    position: absolute;
+    right: 3.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: var(--transition-fast);
+    opacity: 0;
+}
+
+.form-group .valid ~ .validation-icon .fa-check-circle {
+    opacity: 1;
+    color: var(--success);
+}
+
+.form-group .invalid ~ .validation-icon .fa-exclamation-circle {
+    opacity: 1;
+    color: var(--danger);
+}
+
+/* КНОПКА ГЛАЗА — УЛУЧШЕННАЯ */
+.toggle-password-btn {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    width: 2.2rem;
+    height: 2.2rem;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    transition: var(--transition-bounce);
+    z-index: 2;
+}
+
+.toggle-password-btn:hover {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: var(--primary-glow);
+}
+
+.toggle-password-btn svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ — СТИЛЬ SPECTRA */
+.error-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.8rem);
+    left: 0;
+    width: 100%;
+    background: var(--surface-solid);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: var(--danger);
+    text-align: left;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: var(--blur);
+    animation: fadeIn 0.2s ease;
+}
+
+.error-popup::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--surface-solid);
+    border-left: 1px solid var(--danger);
+    border-top: 1px solid var(--danger);
+    transform: rotate(45deg);
+}
+
+.error-popup ul {
+    margin: 0.5rem 0 0 1rem;
+    padding-left: 0;
+}
+
+.error-popup li {
+    margin-bottom: 0.2rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ПОДСКАЗКА ПО ПАРОЛЮ — СТИЛЬ SPECTRA */
+.password-hint {
+    position: absolute;
+    top: calc(100% + 0.8rem);
+    left: 0;
+    width: 100%;
+    background: var(--surface-solid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: left;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+    display: none;
+}
+
+.password-hint.show {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+.password-hint::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--surface-solid);
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    transform: rotate(45deg);
+}
+
+.hint-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hint-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.hint-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-tertiary);
+}
+
+.hint-item i {
+    width: 1rem;
+    font-size: 0.7rem;
+}
+
+.hint-item.valid i {
+    color: var(--success);
+}
+
+.hint-item.invalid i {
+    color: var(--text-muted);
+}
+
+/* ЧЕКБОКС — УЛУЧШЕННЫЙ */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 1.8rem 0;
+    text-align: left;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: var(--radius-xs);
+    border: 2px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    accent-color: var(--primary);
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+    background: var(--gradient-primary);
+    border-color: transparent;
+}
+
+.checkbox-container label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex: 1;
+}
+
+/* КНОПКА РЕГИСТРАЦИИ — В СТИЛЕ SPECTRA */
+.btn-register {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 0.9rem 2.5rem;
+    border-radius: var(--radius-full);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    box-shadow: 0 8px 20px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.3);
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.btn-register::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s, opacity 0.6s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn-register:active::before {
+    width: 200px;
+    height: 200px;
+    opacity: 1;
+}
+
+.btn-register:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.6);
+}
+
+/* РАЗДЕЛИТЕЛЬ */
+.divider {
+    margin: 2rem 0 1.5rem;
+    position: relative;
+    text-align: center;
+}
+
+.divider span {
+    background: var(--surface);
+    padding: 0 1rem;
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: var(--blur);
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid var(--border-light);
+    z-index: 0;
+}
+
+/* СОЦИАЛЬНЫЕ КНОПКИ — УЛУЧШЕННЫЕ */
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: var(--transition-bounce);
+    border: 1px solid var(--border-light);
+    background: var(--surface);
+    backdrop-filter: var(--blur);
+}
+
+.social-btn:hover {
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.social-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+/* Telegram */
+.tg-btn {
+    background: #24A1DE;
+    border-color: transparent;
+}
+
+.tg-btn:hover {
+    box-shadow: 0 8px 20px rgba(36, 161, 222, 0.4);
+}
+
+/* Messenger Max */
+.max-btn {
+    background: var(--gradient-max);
+    border-color: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.max-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.max-btn:hover::after {
+    opacity: 1;
+}
+
+/* КНОПКА ТЕМЫ */
+.theme-toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--border-light);
+    color: var(--text-tertiary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-bounce);
+    font-size: 1.2rem;
+}
+
+.theme-toggle:hover {
+    background: var(--gradient-primary);
+    color: white;
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: var(--primary-glow);
+}
+
+/* УВЕДОМЛЕНИЯ */
+.notification {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface-solid);
+    backdrop-filter: var(--blur-strong);
+    border-radius: var(--radius-full);
+    padding: 0.9rem 1.8rem;
+    box-shadow: var(--shadow-xl);
+    border-left: 6px solid var(--success);
+    display: none;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 2000;
+    animation: notificationSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: fit-content;
+    max-width: 90%;
+}
+
+@keyframes notificationSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.notification i {
+    font-size: 1.5rem;
+    color: var(--success);
+}
+
+.notification-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-title {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.notification-message {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+/* PWA / SAFE AREAS */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-top: max(1rem, env(safe-area-inset-top));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+}
+
+/* АДАПТАЦИЯ */
+@media (max-width: 480px) {
+    .registration-card {
+        padding: 1.8rem;
+    }
+    
+    .social-login {
+        gap: 0.8rem;
+    }
+    
+    .social-btn {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 360px) {
+    .checkbox-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

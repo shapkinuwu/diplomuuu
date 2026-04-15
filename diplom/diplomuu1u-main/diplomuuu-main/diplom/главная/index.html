@@ -1,0 +1,1015 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#161b22" media="(prefers-color-scheme: dark)">
+    <title>Spectra — Главная</title>
+    
+    <!-- FONTS & ICONS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ========== ПОЛНОСТЬЮ ДИЗАЙН SPECTRA (БЕЗ ИЗМЕНЕНИЙ) ========== */
+        :root {
+            --primary-h: 238;
+            --primary-s: 83%;
+            --primary-l: 67%;
+            --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+            --primary-light: hsl(var(--primary-h), 85%, 75%);
+            --primary-dark: hsl(var(--primary-h), 70%, 55%);
+            --primary-soft: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
+            --primary-glow: 0 0 30px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.3);
+            
+            --bg-h: 240;
+            --bg-s: 20%;
+            --bg-l: 99%;
+            --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+            --bg-gradient: radial-gradient(circle at 0% 0%, hsl(240, 50%, 98%), hsl(240, 20%, 99%));
+            
+            --surface-h: 0;
+            --surface-s: 0%;
+            --surface-l: 100%;
+            --surface: hsla(var(--surface-h), var(--surface-s), var(--surface-l), 0.8);
+            --surface-solid: hsl(var(--surface-h), var(--surface-s), var(--surface-l));
+            --surface-hover: hsl(220, 50%, 97%);
+            --surface-active: hsl(220, 40%, 95%);
+            
+            --text-primary-h: 222;
+            --text-primary-s: 47%;
+            --text-primary-l: 11%;
+            --text-primary: hsl(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l));
+            --text-secondary: hsl(215, 25%, 27%);
+            --text-tertiary: hsl(215, 16%, 47%);
+            --text-muted: hsl(215, 20%, 65%);
+            
+            --border-h: 210;
+            --border-s: 20%;
+            --border-l: 90%;
+            --border: hsl(var(--border-h), var(--border-s), var(--border-l));
+            --border-light: hsla(var(--border-h), var(--border-s), var(--border-l), 0.6);
+            --border-active: var(--primary);
+            
+            --shadow-xs: 0 2px 8px hsla(0, 0%, 0%, 0.02);
+            --shadow-sm: 0 4px 16px hsla(0, 0%, 0%, 0.02);
+            --shadow-md: 0 8px 24px hsla(0, 0%, 0%, 0.03);
+            --shadow-lg: 0 20px 32px -8px hsla(0, 0%, 0%, 0.04);
+            --shadow-xl: 0 30px 48px -12px hsla(0, 0%, 0%, 0.08);
+            --shadow-glow: 0 0 0 2px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.1);
+            
+            --gradient-primary: linear-gradient(145deg, hsl(238, 83%, 67%), hsl(258, 70%, 65%));
+            --gradient-sunset: linear-gradient(135deg, hsl(238, 83%, 67%), hsl(280, 70%, 65%), hsl(320, 80%, 65%));
+            --gradient-banner: linear-gradient(135deg, hsl(238, 83%, 67%), hsl(280, 70%, 65%), hsl(320, 80%, 65%));
+            
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-xxl: 24px;
+            --radius-full: 9999px;
+            
+            --blur: blur(20px);
+            --blur-strong: blur(40px);
+            
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --space-unit: 0.25rem;
+            --space-1: calc(var(--space-unit) * 1);
+            --space-2: calc(var(--space-unit) * 2);
+            --space-3: calc(var(--space-unit) * 3);
+            --space-4: calc(var(--space-unit) * 4);
+            --space-5: calc(var(--space-unit) * 5);
+            --space-6: calc(var(--space-unit) * 6);
+            
+            --header-height: 80px;
+            --container-width: min(1200px, 95%);
+        }
+
+        body[data-theme="dark"] {
+            --bg-h: 225;
+            --bg-s: 25%;
+            --bg-l: 9%;
+            --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+            --bg-gradient: radial-gradient(circle at 30% 30%, hsl(225, 20%, 12%), hsl(225, 25%, 7%));
+            
+            --surface-h: 220;
+            --surface-s: 20%;
+            --surface-l: 14%;
+            --surface: hsla(var(--surface-h), var(--surface-s), var(--surface-l), 0.85);
+            --surface-solid: hsl(var(--surface-h), var(--surface-s), var(--surface-l));
+            --surface-hover: hsl(220, 18%, 20%);
+            --surface-active: hsl(220, 16%, 25%);
+            
+            --text-primary-h: 210;
+            --text-primary-s: 40%;
+            --text-primary-l: 96%;
+            --text-primary: hsl(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l));
+            --text-secondary: hsl(210, 30%, 90%);
+            --text-tertiary: hsl(210, 20%, 80%);
+            --text-muted: hsl(215, 16%, 60%);
+            
+            --border-h: 215;
+            --border-s: 20%;
+            --border-l: 25%;
+            --border: hsl(var(--border-h), var(--border-s), var(--border-l));
+            --border-light: hsla(var(--border-h), var(--border-s), var(--border-l), 0.6);
+            
+            --primary: hsl(230, 80%, 74%);
+            --gradient-primary: linear-gradient(145deg, hsl(230, 80%, 74%), hsl(250, 75%, 75%));
+            --gradient-banner: linear-gradient(135deg, hsl(230, 80%, 74%), hsl(280, 70%, 75%), hsl(320, 80%, 75%));
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            background-image: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ========== ХЕДЕР SPECTRA ========== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            background: var(--surface);
+            backdrop-filter: var(--blur-strong);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--header-height);
+        }
+
+        .header-left {
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+            position: relative;
+            display: inline-block;
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo::after {
+            content: '✦';
+            position: absolute;
+            top: -0.2em;
+            right: -0.6em;
+            font-size: 0.7em;
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+            opacity: 0.7;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .header-center {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            transition: all 0.3s ease; /* Добавлено для анимации открытия */
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.6rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border-light);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.1rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.2rem 0;
+            position: relative;
+            white-space: nowrap;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            box-shadow: var(--primary-glow);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { width: 0; opacity: 0; }
+            to { width: 100%; opacity: 1; }
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .btn-theme, .btn-icon, .btn-burger {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border-light);
+            color: var(--text-tertiary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-burger {
+            display: none; /* По умолчанию скрыт */
+        }
+
+        .btn-theme:hover, .btn-burger:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: var(--primary-glow);
+        }
+
+        .btn-icon:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* ========== АДАПТИВ ШАПКИ ========== */
+        @media (max-width: 900px) {
+            .btn-burger { display: flex; }
+            
+            .header-center {
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                max-width: none;
+                background: var(--surface-solid);
+                margin: 0;
+                padding: 1.5rem;
+                flex-direction: column;
+                border-bottom: 1px solid var(--border-light);
+                box-shadow: var(--shadow-xl);
+                display: none; /* Скрыто до активации */
+                z-index: 100;
+            }
+
+            .header-center.active {
+                display: flex;
+                animation: slideDown 0.3s ease-out;
+            }
+
+            @keyframes slideDown {
+                from { transform: translateY(-10px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+        }
+
+        /* ========== КОНТЕЙНЕР ========== */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        /* ========== БАННЕР ========== */
+        .banner {
+            background: var(--gradient-banner);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 60%;
+        }
+
+        .banner-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .banner-subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .banner-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: var(--blur);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.6rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border: none;
+        }
+
+        .banner-btn:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .banner-decoration {
+            position: absolute;
+            right: 2rem;
+            bottom: 0;
+            font-size: 8rem;
+            color: rgba(255,255,255,0.1);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @media (max-width: 768px) {
+            .banner { padding: 1.5rem; }
+            .banner-content { max-width: 100%; }
+            .banner-title { font-size: 1.8rem; }
+            .banner-decoration { display: none; }
+        }
+
+        /* ========== СЕКЦИИ SPECTRA ========== */
+        .section {
+            background: var(--surface);
+            backdrop-filter: var(--blur);
+            border-radius: var(--radius-lg);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            opacity: 0.7;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .section:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-active);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+            color: var(--primary);
+            background: var(--primary-soft);
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover .section-title i {
+            transform: rotate(5deg) scale(1.05);
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .section-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            background: var(--surface-hover);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .section-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateX(3px);
+            border-color: transparent;
+        }
+
+        /* ========== СЕТКИ КНИГ (ОРИГИНАЛЬНЫЕ) ========== */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 992px) {
+            .books-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .books-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .books-grid { grid-template-columns: 1fr; }
+        }
+
+        .book-card {
+            background: var(--surface-hover);
+            border-radius: var(--radius-md);
+            padding: 0.8rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .book-cover {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: var(--gradient-sunset);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .book-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+        }
+
+        .book-author {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.3rem;
+        }
+
+        .book-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            color: #fbbf24;
+            font-size: 0.7rem;
+        }
+
+        /* ========== AI-ПОМОЩНИК (БЕЗ ИЗМЕНЕНИЙ) ========== */
+        .ai-assistant {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .ai-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            animation: pulse-ai 2.5s infinite;
+        }
+
+        @keyframes pulse-ai {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .ai-chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            height: 450px;
+            background: var(--surface-solid);
+            backdrop-filter: var(--blur-strong);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: bottom right;
+        }
+
+        @media (max-width: 480px) {
+            .ai-chat-window { width: 280px; height: 420px; }
+        }
+
+        .ai-chat-window.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .ai-chat-header {
+            padding: 1rem 1.2rem;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .ai-message {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            max-width: 85%;
+        }
+
+        .ai-message.assistant { align-self: flex-start; }
+        .ai-message.user { align-self: flex-end; flex-direction: row-reverse; }
+
+        .ai-message .avatar {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: var(--gradient-primary); color: white;
+            display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0;
+        }
+
+        .ai-message .content {
+            background: var(--surface-hover);
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .ai-chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            gap: 0.6rem;
+            background: var(--surface);
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border);
+            background: var(--surface-hover);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        .ai-chat-input button {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--gradient-primary); border: none; color: white;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* ========== ПОДВАЛ SPECTRA ========== */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border-light);
+            padding: 2rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex; align-items: center; gap: 0.8rem;
+            color: var(--text-tertiary); font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== ХЕДЕР SPECTRA ========== -->
+<header class="header">
+    <div class="header-left">
+        <h1 class="logo" onclick="navigateTo('index')">Spectra</h1>
+    </div>
+    
+    <div class="header-center" id="mainMenu">
+        <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="search" class="search-input" placeholder="Поиск книг, авторов, жанров..." id="globalSearchInput" onkeypress="handleGlobalSearchKeypress(event)">
+        </div>
+        <nav class="nav">
+            <a class="nav-link" onclick="navigateTo('novelties')">Новинки</a>
+            <a class="nav-link" onclick="navigateTo('popular')">Популярное</a>
+            <a class="nav-link" onclick="navigateTo('catalog')">Каталог</a>
+            <a class="nav-link" onclick="navigateTo('profile')">Профиль</a>
+        </nav>
+    </div>
+    
+    <div class="header-right">
+        <button class="btn-theme" onclick="toggleTheme()" title="Сменить тему">
+            <i id="themeIcon" class="fas fa-moon"></i>
+        </button>
+        <button class="btn-icon btn-glass" title="Выйти" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+        <!-- Кнопка бургера -->
+        <button class="btn-burger" onclick="toggleMenu()" title="Меню">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
+
+<main class="container">
+    
+    <!-- ========== БАННЕР ========== -->
+    <div class="banner">
+        <div class="banner-content">
+            <h2 class="banner-title">Книжная вселенная Spectra</h2>
+            <p class="banner-subtitle">Тысячи книг в удобных форматах. Читай онлайн или скачивай бесплатно.</p>
+            <button class="banner-btn" onclick="navigateTo('search')">
+                <i class="fas fa-compass"></i> Исследовать
+            </button>
+        </div>
+        <div class="banner-decoration">
+            <i class="fas fa-book-open"></i>
+        </div>
+    </div>
+    
+    <!-- ========== СЕКЦИИ С КНИГАМИ ========== -->
+    <section class="section">
+        <div class="section-header">
+            <h3 class="section-title"><i class="fas fa-fire"></i> Популярные</h3>
+            <a class="section-link" onclick="navigateTo('popular')">Все <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="books-grid">
+            <div class="book-card" onclick="openBook('1984')">
+                <div class="book-cover">📘</div>
+                <div class="book-title">1984</div>
+                <div class="book-author">Джордж Оруэлл</div>
+                <div class="book-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.8
+                </div>
+            </div>
+            <div class="book-card" onclick="openBook('master')">
+                <div class="book-cover">📕</div>
+                <div class="book-title">Мастер и Маргарита</div>
+                <div class="book-author">Михаил Булгаков</div>
+                <div class="book-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 4.9
+                </div>
+            </div>
+            <div class="book-card" onclick="openBook('crime')">
+                <div class="book-cover">📗</div>
+                <div class="book-title">Преступление и наказание</div>
+                <div class="book-author">Фёдор Достоевский</div>
+                <div class="book-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 4.9
+                </div>
+            </div>
+            <div class="book-card" onclick="openBook('war')">
+                <div class="book-cover">📙</div>
+                <div class="book-title">Война и мир</div>
+                <div class="book-author">Лев Толстой</div>
+                <div class="book-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.7
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Новинки -->
+    <section class="section">
+        <div class="section-header">
+            <h3 class="section-title"><i class="fas fa-star"></i> Новинки</h3>
+            <a class="section-link" onclick="navigateTo('novelties')">Все <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="books-grid">
+            <div class="book-card" onclick="openBook('hotel')">
+                <div class="book-cover">📚</div>
+                <div class="book-title">Гостиница заблудших душ</div>
+                <div class="book-author">Лена Обухова</div>
+                <div class="book-rating"><i class="fas fa-star"></i> 4.8</div>
+            </div>
+            <div class="book-card" onclick="openBook('sugar')">
+                <div class="book-cover">📖</div>
+                <div class="book-title">Сахар и золото</div>
+                <div class="book-author">Эмма Скотт</div>
+                <div class="book-rating"><i class="fas fa-star"></i> 5.0</div>
+            </div>
+            <div class="book-card" onclick="openBook('easy')">
+                <div class="book-cover">📓</div>
+                <div class="book-title">Легкий заказ</div>
+                <div class="book-author">Андрей Васильев</div>
+                <div class="book-rating"><i class="fas fa-star"></i> 4.9</div>
+            </div>
+            <div class="book-card" onclick="openBook('game')">
+                <div class="book-cover">📔</div>
+                <div class="book-title">Игра в убийство</div>
+                <div class="book-author">Людмила Мартова</div>
+                <div class="book-rating"><i class="fas fa-star"></i> 4.8</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- ========== AI-ПОМОЩНИК ========== -->
+<div class="ai-assistant">
+    <button class="ai-button" onclick="toggleAIChat()" id="aiButton">
+        <i class="fas fa-robot"></i>
+    </button>
+    <div class="ai-chat-window" id="aiChatWindow">
+        <div class="ai-chat-header">
+            <h3><i class="fas fa-robot"></i> AI Помощник</h3>
+            <button style="background:none; border:none; color:white; cursor:pointer" onclick="toggleAIChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-chat-messages" id="aiMessages">
+            <div class="ai-message assistant">
+                <div class="avatar"><i class="fas fa-robot"></i></div>
+                <div class="content">Привет! Я AI-помощник Spectra. Спроси меня о книгах!</div>
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="aiInput" placeholder="Напишите..." onkeypress="handleAIKeyPress(event)">
+            <button onclick="sendAIMessage()" id="aiSendBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ПОДВАЛ SPECTRA ========== -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="logo" onclick="navigateTo('index')">Spectra</div>
+        <div class="footer-contacts">
+            <div class="contact-item"><i class="fas fa-phone-alt"></i> +7 (999) 999-99-99</div>
+            <div class="contact-item"><i class="fas fa-envelope"></i> spectra@example.com</div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Состояние AI и Меню
+    let aiChatOpen = false;
+    let menuOpen = false;
+
+    // Переключение меню на мобилках
+    function toggleMenu() {
+        const menu = document.getElementById('mainMenu');
+        menuOpen = !menuOpen;
+        menu.classList.toggle('active', menuOpen);
+    }
+
+    // Тема
+    function toggleTheme() {
+        const body = document.body;
+        const current = body.getAttribute('data-theme');
+        const icon = document.getElementById('themeIcon');
+        if (current === 'dark') {
+            body.removeAttribute('data-theme');
+            icon.className = 'fas fa-moon';
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            icon.className = 'fas fa-sun';
+        }
+    }
+
+    // Навигация
+    function navigateTo(page) {
+        // Закрываем меню при клике
+        document.getElementById('mainMenu').classList.remove('active');
+        menuOpen = false;
+        alert(`Переход на страницу: ${page} (демо-режим)`);
+    }
+
+    function openBook(id) { alert(`Книга: ${id}`); }
+    function logout() { confirm('Выйти?') && alert('Выход'); }
+    function handleGlobalSearchKeypress(e) { if(e.key === 'Enter') alert('Поиск: ' + e.target.value); }
+
+    // AI
+    function toggleAIChat() {
+        const win = document.getElementById('aiChatWindow');
+        aiChatOpen = !aiChatOpen;
+        win.classList.toggle('active', aiChatOpen);
+    }
+
+    function handleAIKeyPress(e) { if(e.key === 'Enter') sendAIMessage(); }
+
+    function sendAIMessage() {
+        const input = document.getElementById('aiInput');
+        const text = input.value.trim();
+        if(!text) return;
+        addMessage(text, true);
+        input.value = '';
+        setTimeout(() => addMessage("Я ваш AI-помощник. Чем могу помочь?"), 800);
+    }
+
+    function addMessage(text, isUser) {
+        const container = document.getElementById('aiMessages');
+        const msg = document.createElement('div');
+        msg.className = `ai-message ${isUser ? 'user' : 'assistant'}`;
+        msg.innerHTML = `
+            <div class="avatar"><i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i></div>
+            <div class="content">${text}</div>
+        `;
+        container.appendChild(msg);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    // Закрытие при клике вне
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('mainMenu');
+        const burger = document.querySelector('.btn-burger');
+        if (menuOpen && !menu.contains(e.target) && !burger.contains(e.target)) {
+            toggleMenu();
+        }
+    });
+</script>
+
+</body>
+</html>

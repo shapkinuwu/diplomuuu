@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#161b22" media="(prefers-color-scheme: dark)">
+    <title>Spectra — Главная</title>
+
+    <!-- FONTS & ICONS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ========== ПОЛНОСТЬЮ ДИЗАЙН SPECTRA ========== */
+        :root {
+            --primary-h: 238;
+            --primary-s: 83%;
+            --primary-l: 67%;
+            --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+            --primary-light: hsl(var(--primary-h), 85%, 75%);
+            --primary-dark: hsl(var(--primary-h), 70%, 55%);
+            --primary-soft: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
+            --primary-glow: 0 0 30px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.3);
+
+            --bg-h: 240;
+            --bg-s: 20%;
+            --bg-l: 99%;
+            --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+            --bg-gradient: radial-gradient(circle at 0% 0%, hsl(240, 50%, 98%), hsl(240, 20%, 99%));
+
+            --surface-h: 0;
+            --surface-s: 0%;
+            --surface-l: 100%;
+            --surface: hsla(var(--surface-h), var(--surface-s), var(--surface-l), 0.8);
+            --surface-solid: hsl(var(--surface-h), var(--surface-s), var(--surface-l));
+            --surface-hover: hsl(220, 50%, 97%);
+            --surface-active: hsl(220, 40%, 95%);
+
+            --text-primary-h: 222;
+            --text-primary-s: 47%;
+            --text-primary-l: 11%;
+            --text-primary: hsl(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l));
+            --text-secondary: hsl(215, 25%, 27%);
+            --text-tertiary: hsl(215, 16%, 47%);
+            --text-muted: hsl(215, 20%, 65%);
+
+            --border-h: 210;
+            --border-s: 20%;
+            --border-l: 90%;
+            --border: hsl(var(--border-h), var(--border-s), var(--border-l));
+            --border-light: hsla(var(--border-h), var(--border-s), var(--border-l), 0.6);
+            --border-active: var(--primary);
+
+            --shadow-xs: 0 2px 8px hsla(0, 0%, 0%, 0.02);
+            --shadow-sm: 0 4px 16px hsla(0, 0%, 0%, 0.02);
+            --shadow-md: 0 8px 24px hsla(0, 0%, 0%, 0.03);
+            --shadow-lg: 0 20px 32px -8px hsla(0, 0%, 0%, 0.04);
+            --shadow-xl: 0 30px 48px -12px hsla(0, 0%, 0%, 0.08);
+            --shadow-glow: 0 0 0 2px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.1);
+
+            --gradient-primary: linear-gradient(145deg, hsl(238, 83%, 67%), hsl(258, 70%, 65%));
+            --gradient-sunset: linear-gradient(135deg, hsl(238, 83%, 67%), hsl(280, 70%, 65%), hsl(320, 80%, 65%));
+            --gradient-banner: linear-gradient(135deg, hsl(238, 83%, 67%), hsl(280, 70%, 65%), hsl(320, 80%, 65%));
+
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-xxl: 24px;
+            --radius-full: 9999px;
+
+            --blur: blur(20px);
+            --blur-strong: blur(40px);
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --space-unit: 0.25rem;
+            --space-1: calc(var(--space-unit) * 1);
+            --space-2: calc(var(--space-unit) * 2);
+            --space-3: calc(var(--space-unit) * 3);
+            --space-4: calc(var(--space-unit) * 4);
+            --space-5: calc(var(--space-unit) * 5);
+            --space-6: calc(var(--space-unit) * 6);
+
+            --header-height: 80px;
+            --container-width: min(1200px, 95%);
+        }
+
+        body[data-theme="dark"] {
+            --bg-h: 225;
+            --bg-s: 25%;
+            --bg-l: 9%;
+            --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+            --bg-gradient: radial-gradient(circle at 30% 30%, hsl(225, 20%, 12%), hsl(225, 25%, 7%));
+
+            --surface-h: 220;
+            --surface-s: 20%;
+            --surface-l: 14%;
+            --surface: hsla(var(--surface-h), var(--surface-s), var(--surface-l), 0.85);
+            --surface-solid: hsl(var(--surface-h), var(--surface-s), var(--surface-l));
+            --surface-hover: hsl(220, 18%, 20%);
+            --surface-active: hsl(220, 16%, 25%);
+
+            --text-primary-h: 210;
+            --text-primary-s: 40%;
+            --text-primary-l: 96%;
+            --text-primary: hsl(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l));
+            --text-secondary: hsl(210, 30%, 90%);
+            --text-tertiary: hsl(210, 20%, 80%);
+            --text-muted: hsl(215, 16%, 60%);
+
+            --border-h: 215;
+            --border-s: 20%;
+            --border-l: 25%;
+            --border: hsl(var(--border-h), var(--border-s), var(--border-l));
+            --border-light: hsla(var(--border-h), var(--border-s), var(--border-l), 0.6);
+
+            --primary: hsl(230, 80%, 74%);
+            --gradient-primary: linear-gradient(145deg, hsl(230, 80%, 74%), hsl(250, 75%, 75%));
+            --gradient-banner: linear-gradient(135deg, hsl(230, 80%, 74%), hsl(280, 70%, 75%), hsl(320, 80%, 75%));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            background-image: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ========== ХЕДЕР SPECTRA ========== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            background: var(--surface);
+            backdrop-filter: var(--blur-strong);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--header-height);
+        }
+
+        .header-left {
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+            position: relative;
+            display: inline-block;
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo::after {
+            content: '✦';
+            position: absolute;
+            top: -0.2em;
+            right: -0.6em;
+            font-size: 0.7em;
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+            opacity: 0.7;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .header-center {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.6rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border-light);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.1rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.2rem 0;
+            position: relative;
+            white-space: nowrap;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            box-shadow: var(--primary-glow);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            box-shadow: var(--primary-glow);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+
+            to {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .btn-theme {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border-light);
+            color: var(--text-tertiary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-theme:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: var(--primary-glow);
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border-light);
+            color: var(--text-tertiary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-icon:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .btn-glass {
+            background: var(--surface);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border-light);
+        }
+
+        /* ========== КОНТЕЙНЕР ========== */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        /* ========== БАННЕР ========== */
+        .banner {
+            background: var(--gradient-banner);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 60%;
+        }
+
+        .banner-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: var(--blur);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.6rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border: none;
+        }
+
+        .banner-btn:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-decoration {
+            position: absolute;
+            right: 2rem;
+            bottom: 0;
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @media (max-width: 768px) {
+            .banner-content {
+                max-width: 100%;
+            }
+
+            .banner-decoration {
+                display: none;
+            }
+        }
+
+        /* ========== СЕКЦИИ SPECTRA ========== */
+        .section {
+            background: var(--surface);
+            backdrop-filter: var(--blur);
+            border-radius: var(--radius-lg);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            opacity: 0.7;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .section:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-active);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+            color: var(--primary);
+            background: var(--primary-soft);
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover .section-title i {
+            transform: rotate(5deg) scale(1.05);
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .section-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            background: var(--surface-hover);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .section-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateX(3px);
+            border-color: transparent;
+        }
+
+        .section-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .section-link:hover i {
+            transform: translateX(2px);
+        }
+
+        /* ========== СЕТКИ КНИГ ========== */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 992px) {
+            .books-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .book-card {
+            background: var(--surface-hover);
+            border-radius: var(--radius-md);
+            padding: 0.8rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .book-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .book-card:hover::before {
+            opacity: 0.03;
+        }
+
+        .book-cover {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: var(--gradient-sunset);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-md);
+        }
+
+        .book-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .book-card:hover .book-title {
+            color: var(--primary);
+        }
+
+        .book-author {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.3rem;
+        }
+
+        .book-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            color: #fbbf24;
+            font-size: 0.7rem;
+        }
+
+        /* ========== AI-ПОМОЩНИК ========== */
+        .ai-assistant {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .ai-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            animation: pulse-ai 2.5s infinite;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ai-button:hover {
+            transform: scale(1.12);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.7);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes pulse-ai {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 12px 30px rgba(99, 102, 241, 0.6);
+            }
+        }
+
+        .ai-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: var(--surface-solid);
+            backdrop-filter: var(--blur-strong);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.85rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .ai-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 22px;
+            width: 12px;
+            height: 12px;
+            background: var(--surface-solid);
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            transform: rotate(45deg);
+            border-radius: 2px;
+        }
+
+        .ai-assistant:hover .ai-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 80px;
+        }
+
+        .ai-chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            height: 450px;
+            background: var(--surface-solid);
+            backdrop-filter: var(--blur-strong);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: bottom right;
+        }
+
+        .ai-chat-window.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .ai-chat-header {
+            padding: 1rem 1.2rem;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-chat-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .ai-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .ai-message {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            max-width: 85%;
+            animation: messageAppear 0.3s ease-out;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-message.assistant {
+            align-self: flex-start;
+        }
+
+        .ai-message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .ai-message .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ai-message.user .avatar {
+            background: var(--surface-hover);
+            color: var(--primary);
+        }
+
+        .ai-message .content {
+            background: var(--surface-hover);
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            position: relative;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .ai-message.assistant .content {
+            background: var(--primary-soft);
+            border-bottom-left-radius: 4px;
+        }
+
+        .ai-message.user .content {
+            background: var(--surface);
+            border-bottom-right-radius: 4px;
+            border: 1px solid var(--border-light);
+        }
+
+        .ai-message .time {
+            font-size: 0.6rem;
+            color: var(--text-tertiary);
+            margin-top: 0.1rem;
+            text-align: right;
+        }
+
+        .ai-chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            gap: 0.6rem;
+            background: var(--surface);
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border);
+            background: var(--surface-hover);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+            background: var(--surface);
+        }
+
+        .ai-chat-input button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-input button:hover:not(:disabled) {
+            transform: scale(1.1);
+            box-shadow: var(--primary-glow);
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.3rem;
+            padding: 0.6rem 1rem;
+            background: var(--primary-soft);
+            border-radius: var(--radius-md);
+            width: fit-content;
+        }
+
+        .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: typing 1.4s infinite;
+        }
+
+        @media (max-width: 480px) {
+            .ai-chat-window {
+                width: 280px;
+                height: 420px;
+            }
+
+            .ai-button {
+                width: 48px;
+                height: 48px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ========== ПОДВАЛ SPECTRA ========== */
+        .footer {
+            background: var(--surface);
+            backdrop-filter: var(--blur-strong);
+            border-top: 1px solid var(--border-light);
+            padding: 2rem 2rem;
+            margin-top: 3rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-logo .logo {
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item i {
+            width: 20px;
+            color: var(--primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(3px);
+        }
+
+        .contact-item:hover i {
+            transform: scale(1.1);
+            color: var(--primary-light);
+        }
+
+        .contact-item:hover a {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: var(--radius-full);
+            border: 2px solid var(--surface);
+        }
+
+        /* ========== НОВЫЕ АДМИН-СТИЛИ ========== */
+        .admin-only {
+            border: 2px dashed var(--primary) !important;
+        }
+
+        .admin-badge {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background: var(--surface-hover);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        .admin-controls {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            gap: 0.3rem;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .book-card:hover .admin-controls {
+            opacity: 1;
+        }
+
+        .admin-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-edit {
+            background: #10b981;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+        }
+
+        .admin-toggle-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--primary-glow);
+        }
+
+        /* ПРЕМИУМ МОДАЛЬНОЕ ОКНО */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--surface-solid);
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: var(--radius-xl);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), var(--primary-glow);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header-admin {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--primary-soft);
+        }
+
+        .modal-body-admin {
+            padding: 2rem;
+        }
+
+        .form-grid-admin {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid-admin {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group-admin {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group-admin.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label-admin {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--text-secondary);
+        }
+
+        .form-label-admin i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .form-input-admin,
+        .form-textarea-admin {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-primary);
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .form-textarea-admin {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-input-admin:focus,
+        .form-textarea-admin:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-soft);
+        }
+
+        .format-group-admin {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .format-chip-admin {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border);
+            background: var(--surface-hover);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .format-chip-admin input {
+            display: none;
+        }
+
+        .format-chip-admin:has(input:checked) {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+        }
+
+        .cover-upload-area-admin {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: var(--bg);
+        }
+
+        .cover-upload-area-admin:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .cover-preview-icon-admin {
+            font-size: 2.5rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .modal-footer-admin {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn-cancel-admin {
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-submit-admin {
+            padding: 0.8rem 2rem;
+            border-radius: var(--radius-full);
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .fab-add-admin {
+            position: fixed;
+            bottom: 5.5rem;
+            right: 1.5rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--text-tertiary);
+            /* Серый цвет */
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            /* Нейтральная тень */
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .fab-add-admin:hover {
+            transform: scale(1.1);
+            background: var(--text-secondary);
+            /* Чуть более темный серый при наведении */
+        }
+
+
+        /* Улучшенный скролл для формы */
+        .form-scroll-area::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .form-scroll-area::-webkit-scrollbar-thumb {
+            background: var(--primary-soft);
+            border-radius: 10px;
+        }
+
+        .form-scroll-area::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Эффект для области загрузки обложки */
+        .cover-upload-area-admin {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--surface-hover);
+            transition: all 0.3s ease;
+        }
+
+        .cover-upload-area-admin:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+            transform: scale(1.02);
+        }
+
+        .modal-sidebar-admin {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== ХЕДЕР SPECTRA ========== -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="logo" onclick="navigateTo('index')">Spectra</h1>
+        </div>
+
+        <div class="header-center">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" class="search-input" placeholder="Поиск книг, авторов, жанров..."
+                    aria-label="Поиск" id="globalSearchInput" onkeypress="handleGlobalSearchKeypress(event)">
+            </div>
+            <nav class="nav" aria-label="Основная навигация">
+                <a class="nav-link" onclick="navigateTo('novelties')">Новинки</a>
+                <a class="nav-link" onclick="navigateTo('popular')">Популярное</a>
+                <a class="nav-link" onclick="navigateTo('catalog')">Каталог</a>
+                <a class="nav-link" onclick="navigateTo('profile')">Профиль</a>
+            </nav>
+        </div>
+
+        <div class="header-right">
+            <!-- Кнопка входа в админку -->
+            <button class="btn-icon btn-glass admin-toggle-btn" onclick="toggleAdminMode()" title="Режим админа">
+                <i class="fas fa-user-shield"></i>
+            </button>
+
+            <button class="btn-theme" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">
+                <i id="themeIcon" class="fas fa-moon"></i>
+            </button>
+            <button class="btn-icon btn-glass" title="Выйти" aria-label="Выйти" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ========== АДМИН-ПАНЕЛЬ ========== -->
+        <section class="section admin-only" id="adminPanel" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title"><i class="fas fa-chart-line"></i> Панель управления</h3>
+                <span class="admin-badge">ADMIN MODE</span>
+            </div>
+            <div class="admin-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">1,284</div>
+                    <div class="stat-label">Пользователей</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">42</div>
+                    <div class="stat-label">Новых сегодня</div>
+                </div>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <button class="banner-btn"
+                        style="padding: 0.5rem 1.5rem; font-size: 0.8rem; background: var(--surface-hover); color: var(--text-primary); border: 1px solid var(--border);"
+                        onclick="openModal()"><i class="fas fa-plus"></i> Добавить книгу</button>
+                    <button class="banner-btn"
+                        style="padding: 0.5rem 1.5rem; font-size: 0.8rem; background: var(--surface-hover); color: var(--text-primary);"><i
+                            class="fas fa-users-cog"></i> Управление юзерами</button>
+                </div>
+        </section>
+
+        <!-- ========== БАННЕР ========== -->
+        <div class="banner">
+            <div class="banner-content">
+                <h2 class="banner-title">Книжная вселенная Spectra</h2>
+                <p class="banner-subtitle">Тысячи книг в удобных форматах. Читай онлайн или скачивай бесплатно.</p>
+                <button class="banner-btn" onclick="navigateTo('search')">
+                    <i class="fas fa-compass"></i> Исследовать
+                </button>
+            </div>
+            <div class="banner-decoration">
+                <i class="fas fa-book-open"></i>
+            </div>
+        </div>
+
+        <!-- ========== СЕКЦИИ С КНИГАМИ ========== -->
+
+        <!-- Популярные -->
+        <section class="section">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-fire"></i> Популярные
+                </h3>
+                <a class="section-link" onclick="navigateTo('popular')">
+                    Все <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="books-grid">
+                <div class="book-card" onclick="openBook('1984')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📘</div>
+                    <div class="book-title">1984</div>
+                    <div class="book-author">Джордж Оруэлл</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        4.8
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('master')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📕</div>
+                    <div class="book-title">Мастер и Маргарита</div>
+                    <div class="book-author">Михаил Булгаков</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        4.9
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('crime')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📗</div>
+                    <div class="book-title">Преступление и наказание</div>
+                    <div class="book-author">Фёдор Достоевский</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        4.9
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('war')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📙</div>
+                    <div class="book-title">Война и мир</div>
+                    <div class="book-author">Лев Толстой</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        4.7
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Новинки -->
+        <section class="section">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-star"></i> Новинки
+                </h3>
+                <a class="section-link" onclick="navigateTo('novelties')">
+                    Все <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="books-grid">
+                <div class="book-card" onclick="openBook('hotel')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📚</div>
+                    <div class="book-title">Гостиница заблудших душ</div>
+                    <div class="book-author">Лена Обухова</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        4.8
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('sugar')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📖</div>
+                    <div class="book-title">Сахар и золото</div>
+                    <div class="book-author">Эмма Скотт</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        5.0
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('easy')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📓</div>
+                    <div class="book-title">Легкий заказ</div>
+                    <div class="book-author">Андрей Васильев</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        4.9
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('game')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📔</div>
+                    <div class="book-title">Игра в убийство</div>
+                    <div class="book-author">Людмила Мартова</div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        4.8
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Выходят прямо сейчас -->
+        <section class="section">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-clock"></i> Выходят прямо сейчас
+                </h3>
+                <a class="section-link" onclick="navigateTo('upcoming')">
+                    Все <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="books-grid">
+                <div class="book-card" onclick="openBook('hunter')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📕</div>
+                    <div class="book-title">Охотник на людей</div>
+                    <div class="book-author">Лорет Энн Уайт</div>
+                    <div class="book-rating">
+                        <i class="fas fa-clock"></i> 3 дня
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('armada')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📘</div>
+                    <div class="book-title">Армада Вторжения</div>
+                    <div class="book-author">Макс Глебов</div>
+                    <div class="book-rating">
+                        <i class="fas fa-clock"></i> 5 дней
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('mystery')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📗</div>
+                    <div class="book-title">Тайна старого дома</div>
+                    <div class="book-author">Анна Иванова</div>
+                    <div class="book-rating">
+                        <i class="fas fa-clock"></i> 1 неделя
+                    </div>
+                </div>
+                <div class="book-card" onclick="openBook('lost')">
+                    <div class="admin-controls admin-ui" style="display: none;">
+                        <button class="admin-btn btn-edit" onclick="event.stopPropagation(); alert('Редактировать')"><i
+                                class="fas fa-pen"></i></button>
+                        <button class="admin-btn btn-delete" onclick="event.stopPropagation(); alert('Удалить')"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="book-cover">📙</div>
+                    <div class="book-title">Заблудшие</div>
+                    <div class="book-author">Петр Сидоров</div>
+                    <div class="book-rating">
+                        <i class="fas fa-clock"></i> 2 недели
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== AI-ПОМОЩНИК ========== -->
+    <div class="ai-assistant">
+        <div class="ai-tooltip">Спроси у AI</div>
+        <button class="ai-button" onclick="toggleAIChat()" id="aiButton">
+            <i class="fas fa-robot"></i>
+        </button>
+
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-chat-header">
+                <h3><i class="fas fa-robot"></i> AI Помощник</h3>
+                <button class="ai-close-btn" onclick="toggleAIChat()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="ai-chat-messages" id="aiMessages">
+                <div class="ai-message assistant">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="content">
+                        <div>Привет! Я AI-помощник Spectra. Спроси меня о книгах!</div>
+                        <div class="time">только что</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-chat-input">
+                <input type="text" id="aiInput" placeholder="Напишите сообщение..."
+                    onkeypress="handleAIKeyPress(event)">
+                <button onclick="sendAIMessage()" id="aiSendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ПРЕМИУМ МОДАЛЬНОЕ ОКНО ========== -->
+    <!-- ========== УСОВЕРШЕНСТВОВАННОЕ АДМИН-ОКНО ========== -->
+    <div class="modal-overlay" id="addBookModal">
+        <div class="modal-content" style="max-width: 850px;"> <!-- Увеличили ширину для удобства -->
+            <i class="fas fa-times"
+                style="position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; z-index: 10;"
+                onclick="closeModal()"></i>
+
+            <div class="modal-header-admin">
+                <h2
+                    style="font-size: 1.6rem; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Создание карточки Spectra</h2>
+                <p style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 5px;">Полная синхронизация с
+                    параметрами отображения страницы книги</p>
+            </div>
+
+            <form onsubmit="saveBook(event)">
+                <div class="modal-body-admin" style="display: grid; grid-template-columns: 250px 1fr; gap: 2rem;">
+
+                    <!-- Левая колонка: Обложка и превью -->
+                    <div class="modal-sidebar-admin">
+                        <label class="form-label-admin"><i class="fas fa-image"></i> Обложка</label>
+                        <div class="cover-upload-area-admin" id="coverPreviewContainer"
+                            style="height: 350px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden;">
+                            <i class="fas fa-cloud-upload-alt cover-preview-icon-admin"></i>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); padding: 0 1rem;">PNG, JPG (2:3)</p>
+                            <input type="file" id="bookCoverInput"
+                                style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer;"
+                                onchange="previewImage(this)">
+                            <img id="coverImage"
+                                style="display:none; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <label class="form-label-admin"><i class="fas fa-shield-halved"></i> Возрастной ценз</label>
+                            <select class="form-input-admin">
+                                <option>0+</option>
+                                <option>6+</option>
+                                <option>12+</option>
+                                <option selected>16+</option>
+                                <option>18+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Правая колонка: Данные -->
+                    <div class="form-scroll-area" style="max-height: 60vh; overflow-y: auto; padding-right: 10px;">
+
+                        <!-- Блок: Основное -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">
+                                Основные данные</h4>
+                            <div class="form-grid-admin">
+                                <div class="form-group-admin full-width">
+                                    <label class="form-label-admin">Название книги</label>
+                                    <input type="text" class="form-input-admin" placeholder="Введите название..."
+                                        required>
+                                </div>
+                                <div class="form-group-admin">
+                                    <label class="form-label-admin">Автор(ы)</label>
+                                    <input type="text" class="form-input-admin" placeholder="Имя Автора">
+                                </div>
+                                <div class="form-group-admin">
+                                    <label class="form-label-admin">Правообладатель</label>
+                                    <input type="text" class="form-input-admin"
+                                        placeholder="Напр: Автор или Издательство">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Блок: Серия -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">
+                                Серия (если есть)</h4>
+                            <div class="form-grid-admin">
+                                <div class="form-group-admin" style="grid-column: span 3/4;">
+                                    <label class="form-label-admin">Название серии</label>
+                                    <input type="text" class="form-input-admin" placeholder="Напр: Архивное дело">
+                                </div>
+                                <div class="form-group-admin">
+                                    <label class="form-label-admin">№ в серии</label>
+                                    <input type="number" class="form-input-admin" placeholder="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Блок: Метаданные (как в правой колонке страницы книги) -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">
+                                Технические подробности</h4>
+                            <div class="form-grid-admin">
+                                <div class="form-group-admin">
+                                    <label class="form-label-admin">Дата выхода</label>
+                                    <input type="date" class="form-input-admin">
+                                </div>
+                                <div class="form-group-admin">
+                                    <label class="form-label-admin">Дата написания</label>
+                                    <input type="number" class="form-input-admin" placeholder="2026">
+                                </div>
+                                <div class="form-group-admin">
+                                    <label class="form-label-admin">Объем (стр.)</label>
+                                    <input type="number" class="form-input-admin" placeholder="0">
+                                </div>
+                                <div class="form-group-admin">
+                                    <label class="form-label-admin">Иллюстрации</label>
+                                    <input type="number" class="form-input-admin" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Блок: Контент -->
+                        <div style="margin-bottom: 2rem;">
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">
+                                Описание и Теги</h4>
+                            <div class="form-group-admin full-width">
+                                <label class="form-label-admin">Аннотация</label>
+                                <textarea class="form-textarea-admin" style="min-height: 120px;"
+                                    placeholder="Краткое описание для читателей..."></textarea>
+                            </div>
+                            <div class="form-group-admin full-width">
+                                <label class="form-label-admin">Теги и жанры (через запятую)</label>
+                                <input type="text" class="form-input-admin"
+                                    placeholder="Мистика, Детектив, Тайны прошлого...">
+                            </div>
+                        </div>
+
+                        <!-- Блок: Форматы -->
+                        <div style="margin-bottom: 1rem;">
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">
+                                Доступные форматы</h4>
+                            <div class="format-group-admin">
+                                <label class="format-chip-admin"><input type="checkbox" checked>
+                                    <span>EPUB</span></label>
+                                <label class="format-chip-admin"><input type="checkbox" checked>
+                                    <span>FB2</span></label>
+                                <label class="format-chip-admin"><input type="checkbox"> <span>FB3</span></label>
+                                <label class="format-chip-admin"><input type="checkbox"> <span>MOBI</span></label>
+                                <label class="format-chip-admin"><input type="checkbox"> <span>PDF</span></label>
+                                <label class="format-chip-admin"><input type="checkbox"> <span>TXT</span></label>
+                                <label class="format-chip-admin"><input type="checkbox"> <span>MP3
+                                        (Audio)</span></label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer-admin"
+                    style="background: var(--bg); border-bottom-left-radius: var(--radius-xl); border-bottom-right-radius: var(--radius-xl);">
+                    <button type="button" class="btn-cancel-admin" onclick="closeModal()">Отмена</button>
+                    <button type="submit" class="btn-submit-admin"><i class="fas fa-paper-plane"></i> Опубликовать в
+                        Spectra</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Плавающая кнопка добавления -->
+    <div class="fab-add-admin admin-ui" onclick="openModal()" title="Добавить книгу">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <!-- ========== ПОДВАЛ SPECTRA ========== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo" onclick="navigateTo('index')">Spectra</div>
+            </div>
+            <div class="footer-contacts">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+79999999999">+7 (999) 999-99-99</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:spectra@example.com">spectra@example.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-paper-plane"></i>
+                    <a href="#">Spectra в Telegram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Текущая страница
+        let currentPage = 'index';
+
+        // Состояние AI-чата
+        let aiChatOpen = false;
+        let isTyping = false;
+
+        // Состояние админки
+        let isAdminMode = false;
+
+        // Функция переключения темы
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const icon = document.getElementById('themeIcon');
+
+            if (current === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Функция навигации
+        function navigateTo(page) {
+            if (page === 'search') {
+                window.location.href = 'search.html';
+            } else if (page === 'index') {
+                window.location.href = 'index.html';
+            } else if (page === 'novelties') {
+                window.location.href = 'search.html?filter=novelties';
+            } else if (page === 'popular') {
+                window.location.href = 'search.html?filter=popular';
+            } else if (page === 'catalog') {
+                window.location.href = 'search.html';
+            } else if (page === 'profile') {
+                window.location.href = 'profile.html';
+            } else if (page === 'upcoming') {
+                window.location.href = 'search.html?filter=upcoming';
+            } else {
+                alert(`Переход на страницу: ${page} (демо-режим)`);
+            }
+        }
+
+        // Функция открытия книги
+        function openBook(bookId) {
+            window.location.href = `book.html?id=${bookId}`;
+        }
+
+        // Функция выхода
+        function logout() {
+            if (confirm('Выйти из аккаунта?')) {
+                alert('Вы вышли из системы (демо-режим)');
+            }
+        }
+
+        // Обработка поиска с главной
+        function handleGlobalSearchKeypress(event) {
+            if (event.key === 'Enter') {
+                const query = event.target.value.trim();
+                if (query) {
+                    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                }
+            }
+        }
+
+        // Функция открытия/закрытия AI-чата
+        function toggleAIChat() {
+            const chatWindow = document.getElementById('aiChatWindow');
+            aiChatOpen = !aiChatOpen;
+
+            if (aiChatOpen) {
+                chatWindow.classList.add('active');
+                document.getElementById('aiInput').focus();
+            } else {
+                chatWindow.classList.remove('active');
+            }
+        }
+
+        // Обработка нажатия Enter
+        function handleAIKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        // Добавление сообщения в чат
+        function addMessage(text, isUser = false) {
+            const messagesContainer = document.getElementById('aiMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `ai-message ${isUser ? 'user' : 'assistant'}`;
+
+            const time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
+            messageDiv.innerHTML = `
+            <div class="avatar">
+                <i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i>
+            </div>
+            <div class="content">
+                <div>${text}</div>
+                <div class="time">${time}</div>
+            </div>
+        `;
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Показать индикатор печатания
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('aiMessages');
+            const indicator = document.createElement('div');
+            indicator.className = 'ai-message assistant';
+            indicator.id = 'typingIndicator';
+            indicator.innerHTML = `
+            <div class="avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        `;
+            messagesContainer.appendChild(indicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            isTyping = true;
+        }
+
+        // Скрыть индикатор печатания
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+            isTyping = false;
+        }
+
+        // Имитация API
+        async function callAIApi(message) {
+            await new Promise(resolve => setTimeout(resolve, 1200));
+
+            const responses = [
+                "Рекомендую 'Гостиницу заблудших душ' — отличный мистический детектив!",
+                "Популярные книги: '1984', 'Мастер и Маргарита', 'Преступление и наказание'.",
+                "Из новинок советую 'Сахар и золото' Эммы Скотт.",
+                "В фантастике лидирует 'Армада Вторжения' Макса Глебова.",
+                "У нас есть книги в форматах epub, fb2, mobi, pdf."
+            ];
+
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Отправка сообщения
+        async function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+            const sendBtn = document.getElementById('aiSendBtn');
+
+            if (!message || isTyping) return;
+
+            addMessage(message, true);
+            input.value = '';
+
+            sendBtn.disabled = true;
+            showTypingIndicator();
+
+            try {
+                const response = await callAIApi(message);
+                hideTypingIndicator();
+                addMessage(response);
+            } catch (error) {
+                hideTypingIndicator();
+                addMessage('Извините, произошла ошибка.');
+            } finally {
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        // Закрытие чата при клике вне
+        document.addEventListener('click', (e) => {
+            const chatWindow = document.getElementById('aiChatWindow');
+            const aiButton = document.getElementById('aiButton');
+
+            if (aiChatOpen &&
+                !chatWindow.contains(e.target) &&
+                !aiButton.contains(e.target)) {
+                toggleAIChat();
+            }
+        });
+
+        // Подсветка активной ссылки
+        function setActiveNav() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            if (currentPage === 'index') {
+                // На главной не подсвечиваем
+            } else if (currentPage === 'novelties') {
+                navLinks[0]?.classList.add('active');
+            } else if (currentPage === 'popular') {
+                navLinks[1]?.classList.add('active');
+            } else if (currentPage === 'catalog') {
+                navLinks[2]?.classList.add('active');
+            } else if (currentPage === 'profile') {
+                navLinks[3]?.classList.add('active');
+            }
+        }
+
+        // АДМИН-ФУНКЦИИ
+        function toggleAdminMode() {
+            isAdminMode = !isAdminMode;
+
+            const adminPanel = document.getElementById('adminPanel');
+            const adminUIElements = document.querySelectorAll('.admin-ui');
+            const toggleBtn = document.querySelector('.admin-toggle-btn');
+
+            if (isAdminMode) {
+                adminPanel.style.display = 'block';
+                adminUIElements.forEach(el => el.style.display = 'flex');
+                toggleBtn.classList.add('active');
+            } else {
+                adminPanel.style.display = 'none';
+                adminUIElements.forEach(el => el.style.display = 'none');
+                toggleBtn.classList.remove('active');
+            }
+        }
+
+        function openModal() {
+            document.getElementById('addBookModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('addBookModal').style.display = 'none';
+        }
+
+        function saveBook(e) {
+            e.preventDefault();
+            alert('Книга успешно добавлена!');
+            closeModal();
+        }
+
+        // Инициализация
+        window.addEventListener('load', () => {
+            setActiveNav();
+        });
+
+        // Функция превью загружаемой обложки
+        function previewImage(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.getElementById('coverImage');
+                    const icon = document.querySelector('.cover-preview-icon-admin');
+                    const text = icon.nextElementSibling;
+
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    icon.style.display = 'none';
+                    text.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Усовершенствованное сохранение (имитация)
+        function saveBook(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit-admin');
+            const originalText = btn.innerHTML;
+
+            // Эффект загрузки
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Публикация...';
+
+            setTimeout(() => {
+                alert('Книга успешно добавлена в базу данных Spectra и доступна для модерации!');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                closeModal();
+            }, 1500);
+        }
+    </script>
+
+</body>
+
+</html>
