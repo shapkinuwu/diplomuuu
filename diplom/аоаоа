@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Spectra — Итоговая сборка</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Исходные переменные */
+        :root {
+            --primary-h: 238;
+            --primary-s: 83%;
+            --primary-l: 67%;
+            --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+            --bg: #faf7f2;
+            --surface: hsla(0, 0%, 100%, 0.8);
+            --text-primary: #2c3e50;
+            --border-light: rgba(0,0,0,0.05);
+            --header-height: 70px;
+        }
+
+        /* Темы оформления */
+        body[data-reading-theme="classic"] { background-color: #faf7f2; color: #2c3e50; }
+        body[data-reading-theme="night"] { background-color: #1a1e24; color: #b3c5d7; }
+        body[data-reading-theme="radiation"] { background-color: #0a0f0f; color: #a8ffc0; }
+
+        body {
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            padding-top: 0px;
+            padding-right: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        /* Шапка */
+        .reader-header {
+            position: sticky;
+            top: 0px;
+            height: 70px;
+            background-color: var(--surface);
+            backdrop-filter: blur(15px);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 20px;
+            padding-right: 20px;
+            z-index: 1000;
+        }
+
+        .book-info { text-align: center; }
+        .book-title-header { font-weight: bold; display: block; }
+        .book-chapter { font-size: 12px; opacity: 0.7; }
+
+        /* Контейнер текста */
+        .reader-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .reader-content {
+            width: 100%;
+            max-width: 800px; /* Это значение меняется ползунком */
+            padding-top: 40px;
+            padding-bottom: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
+            transition: max-width 0.3s;
+        }
+
+        .book-content {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Панели (Настройки и Закладки - Справа) */
+        .settings-panel, .bookmark-panel {
+            position: fixed;
+            top: 70px;
+            right: -400px;
+            width: 350px;
+            height: calc(100vh - 70px);
+            background-color: #ffffff;
+            border-left: 1px solid var(--border-light);
+            transition: right 0.4s ease;
+            z-index: 1100;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+        }
+
+        /* Панель комментариев - Слева */
+        .comments-panel {
+            position: fixed;
+            top: 70px;
+            left: -400px;
+            width: 350px;
+            height: calc(100vh - 70px);
+            background-color: #ffffff;
+            border-right: 1px solid var(--border-light);
+            transition: left 0.4s ease;
+            z-index: 1100;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+        }
+
+        .settings-panel.open, .bookmark-panel.open { right: 0px; }
+        .comments-panel.open { left: 0px; }
+
+        /* Элементы управления */
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            border: 1px solid #eee;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-icon:hover { background-color: var(--primary); color: white; }
+
+        .settings-row { margin-bottom: 20px; }
+        .settings-label { display: block; margin-bottom: 8px; font-weight: 500; }
+        
+        .settings-option { 
+            padding: 5px 15px; 
+            border: 1px solid #ddd; 
+            background: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin-right: 5px;
+        }
+        .settings-option.active { background-color: var(--primary); color: white; }
+
+        /* Комментарии и Закладки */
+        .comment-input { width: 100%; border: 1px solid #ddd; padding: 10px; border-radius: 8px; resize: none; font-family: inherit; }
+        .comment-item, .bookmark-item { 
+            background-color: #f9f9f9; 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-bottom: 10px; 
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .btn-send { 
+            background-color: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+
+        /* Прогресс */
+        .reading-progress { height: 4px; background-color: #eee; cursor: pointer; }
+        .progress-bar { height: 100%; background-color: var(--primary); transition: width 0.2s; }
+
+        /* Модальное окно */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal-content { background-color: white; padding: 25px; border-radius: 15px; width: 350px; }
+        
+        .btn-register { 
+            background-color: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+        }
+
+        .theme-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .theme-card { border: 1px solid #ddd; padding: 10px; text-align: center; cursor: pointer; border-radius: 5px; font-size: 12px; }
+    </style>
+</head>
+<body data-reading-theme="classic">
+
+    <header class="reader-header">
+        <button class="btn-icon" onclick="toggleBookmarkPanel()"><i class="fas fa-bookmark"></i></button>
+        <div class="book-info">
+            <span class="book-title-header">Название книги</span>
+            <span class="book-chapter">Глава 1: Начало</span>
+        </div>
+        <div class="header-actions" style="display: flex; gap: 10px;">
+            <button class="btn-icon" onclick="toggleComments()">
+                <i class="fas fa-comment"></i>
+                <span id="commentCount" style="font-size: 10px; margin-left: 2px;">0</span>
+            </button>
+            <button class="btn-icon" onclick="toggleSettings()"><i class="fas fa-sliders-h"></i></button>
+        </div>
+    </header>
+
+    <div class="reading-progress" id="progressContainer" onclick="jumpToPosition(event)">
+        <div class="progress-bar" id="progressBar" style="width: 10%;"></div>
+    </div>
+
+    <div class="reader-container">
+        <div class="reader-content" id="readerContent">
+            <div class="book-content" id="bookContent">
+                <h1>Глава 1</h1>
+                <p>Здесь находится ваш основной текст. Вы можете изменять его ширину, количество колонок и размер шрифта через панель настроек справа.</p>
+                <p>При добавлении комментария, ссылки будут автоматически заменяться на заглушку, а запрещенные слова — на звездочки.</p>
+                <p>Используйте стрелки на клавиатуре для имитации перелистывания страниц.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="settingsPanel" class="settings-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Настройки</h2>
+            <button class="btn-icon" onclick="toggleSettings()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="settings-row">
+            <span class="settings-label">Размер шрифта: <span id="fontSizeVal">18px</span></span>
+            <input type="range" style="width: 100%;" min="12" max="40" value="18" oninput="changeFontSize(this.value)">
+        </div>
+
+        <div class="settings-row">
+            <span class="settings-label">Колонки</span>
+            <button id="btnCol1" class="settings-option active" onclick="setColumns(1)">1 колонка</button>
+            <button id="btnCol2" class="settings-option" onclick="setColumns(2)">2 колонки</button>
+        </div>
+
+        <div class="settings-row">
+            <span class="settings-label">Ширина страницы (Поля)</span>
+            <input type="range" style="width: 100%;" min="400" max="1200" value="800" oninput="changeContentWidth(this.value)">
+        </div>
+
+        <div class="settings-row">
+            <span class="settings-label">Тема</span>
+            <div class="theme-grid">
+                <div class="theme-card" onclick="setReadingTheme('classic')">Классика</div>
+                <div class="theme-card" onclick="setReadingTheme('night')">Ночь</div>
+                <div class="theme-card" onclick="setReadingTheme('radiation')">Радиация</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bookmarkPanel" class="bookmark-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3>Закладки</h3>
+            <button class="btn-icon" onclick="openBookmarkModal()"><i class="fas fa-plus"></i></button>
+        </div>
+        <div id="bookmarkList"></div>
+    </div>
+
+    <div id="commentsPanel" class="comments-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3>Комментарии (<span id="commentsHeaderCount">0</span>)</h3>
+            <button class="btn-icon" onclick="toggleComments()"><i class="fas fa-times"></i></button>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <textarea id="commentInput" class="comment-input" rows="3" placeholder="Напишите что-нибудь..." maxlength="300" oninput="updateCharCount()"></textarea>
+            <div style="display: flex; justify-content: space-between; margin-top: 5px; align-items: center;">
+                <span id="charCounter" style="font-size: 11px; color: #999;">0 / 300</span>
+                <button class="btn-send" onclick="addComment()">Отправить</button>
+            </div>
+        </div>
+        <div id="commentsList" style="overflow-y: auto; flex: 1;"></div>
+    </div>
+
+    <div id="bookmarkModal" class="modal">
+        <div class="modal-content">
+            <h3 id="bmModalTitle" style="margin-bottom: 15px;">Новая закладка</h3>
+            <input type="hidden" id="editBookmarkId">
+            <input type="text" id="bookmarkNameInput" class="comment-input" placeholder="Название" style="margin-bottom: 10px;">
+            <input type="number" id="bookmarkPageInput" class="comment-input" placeholder="Страница">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn-register" style="background:#ccc; flex:1" onclick="closeBookmarkModal()">Отмена</button>
+                <button class="btn-register" style="flex:1" onclick="saveBookmark()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var settingsOpen = false;
+        var bookmarkPanelOpen = false;
+        var commentsOpen = false;
+        var BANNED_WORDS = ['спам', 'реклама', 'плохоеслово'];
+
+        // ПАНЕЛИ
+        function toggleSettings() {
+            if (settingsOpen == false) {
+                settingsOpen = true;
+                document.getElementById('settingsPanel').classList.add('open');
+                closeBookmarks();
+                closeComments();
+            } else {
+                settingsOpen = false;
+                document.getElementById('settingsPanel').classList.remove('open');
+            }
+        }
+
+        function toggleBookmarkPanel() {
+            if (bookmarkPanelOpen == false) {
+                bookmarkPanelOpen = true;
+                document.getElementById('bookmarkPanel').classList.add('open');
+                closeSettings();
+                closeComments();
+            } else {
+                bookmarkPanelOpen = false;
+                document.getElementById('bookmarkPanel').classList.remove('open');
+            }
+        }
+
+        function toggleComments() {
+            if (commentsOpen == false) {
+                commentsOpen = true;
+                document.getElementById('commentsPanel').classList.add('open');
+                closeSettings();
+                closeBookmarks();
+            } else {
+                commentsOpen = false;
+                document.getElementById('commentsPanel').classList.remove('open');
+            }
+        }
+
+        function closeSettings() { settingsOpen = false; document.getElementById('settingsPanel').classList.remove('open'); }
+        function closeBookmarks() { bookmarkPanelOpen = false; document.getElementById('bookmarkPanel').classList.remove('open'); }
+        function closeComments() { commentsOpen = false; document.getElementById('commentsPanel').classList.remove('open'); }
+
+        // ТЕКСТ
+        function changeFontSize(size) {
+            document.getElementById('fontSizeVal').innerHTML = size + 'px';
+            document.getElementById('bookContent').style.fontSize = size + 'px';
+        }
+
+        function changeContentWidth(width) {
+            document.getElementById('readerContent').style.maxWidth = width + 'px';
+        }
+
+        function setColumns(count) {
+            var content = document.getElementById('bookContent');
+            if (count == 1) {
+                content.style.columnCount = "1";
+                document.getElementById('btnCol1').classList.add('active');
+                document.getElementById('btnCol2').classList.remove('active');
+            } else {
+                content.style.columnCount = "2";
+                content.style.columnGap = "40px";
+                document.getElementById('btnCol2').classList.add('active');
+                document.getElementById('btnCol1').classList.remove('active');
+            }
+        }
+
+        function setReadingTheme(theme) {
+            document.body.setAttribute('data-reading-theme', theme);
+        }
+
+        // КОММЕНТАРИИ
+        function updateCharCount() {
+            var input = document.getElementById('commentInput');
+            var text = input.value;
+            
+            // Цензура ссылок
+            text = text.replace("http://", "[ссылка]");
+            text = text.replace("https://", "[ссылка]");
+            
+            // Цензура слов
+            for (var i = 0; i < BANNED_WORDS.length; i++) {
+                var word = BANNED_WORDS[i];
+                while (text.includes(word)) {
+                    text = text.replace(word, "***");
+                }
+            }
+            
+            input.value = text;
+            document.getElementById('charCounter').innerHTML = text.length + " / 300";
+        }
+
+        function addComment() {
+            var input = document.getElementById('commentInput');
+            var text = input.value;
+            if (text.trim().length > 0) {
+                var list = document.getElementById('commentsList');
+                var div = document.createElement('div');
+                div.className = 'comment-item';
+                div.innerHTML = '<div style="display:flex; justify-content:space-between"><span style="font-weight:bold">Пользователь</span><button onclick="report(this)" style="border:none; background:none; cursor:pointer; color:#ccc"><i class="fas fa-flag"></i></button></div><div style="margin-top:5px">' + text + '</div>';
+                list.insertBefore(div, list.firstChild);
+                input.value = "";
+                document.getElementById('commentCount').innerHTML = list.children.length;
+                document.getElementById('commentsHeaderCount').innerHTML = list.children.length;
+                document.getElementById('charCounter').innerHTML = "0 / 300";
+            }
+        }
+
+        function report(btn) {
+            btn.style.color = "red";
+            alert("Жалоба отправлена");
+        }
+
+        // ЗАКЛАДКИ
+        function openBookmarkModal() {
+            document.getElementById('bookmarkModal').style.display = 'flex';
+        }
+
+        function closeBookmarkModal() {
+            document.getElementById('bookmarkModal').style.display = 'none';
+            document.getElementById('editBookmarkId').value = "";
+            document.getElementById('bookmarkNameInput').value = "";
+            document.getElementById('bookmarkPageInput').value = "";
+        }
+
+        function saveBookmark() {
+            var name = document.getElementById('bookmarkNameInput').value;
+            var page = document.getElementById('bookmarkPageInput').value;
+            var editId = document.getElementById('editBookmarkId').value;
+
+            if (name == "") { name = "Без названия"; }
+            if (page == "") { page = "0"; }
+
+            if (editId != "") {
+                var item = document.getElementById(editId);
+                item.querySelector('.bm-text').innerHTML = name + ' (стр. ' + page + ')';
+            } else {
+                var id = "bm_" + Date.now();
+                var list = document.getElementById('bookmarkList');
+                var div = document.createElement('div');
+                div.className = 'bookmark-item';
+                div.id = id;
+                div.innerHTML = '<span class="bm-text">' + name + ' (стр. ' + page + ')</span>' + 
+                                '<button onclick="editBookmark(\'' + id + '\')" style="float:right; border:none; background:none; cursor:pointer"><i class="fas fa-edit"></i></button>';
+                list.insertBefore(div, list.firstChild);
+            }
+            closeBookmarkModal();
+        }
+
+        function editBookmark(id) {
+            var item = document.getElementById(id);
+            var fullText = item.querySelector('.bm-text').innerHTML;
+            var name = fullText.split(' (стр. ')[0];
+            
+            document.getElementById('bookmarkNameInput').value = name;
+            document.getElementById('editBookmarkId').value = id;
+            document.getElementById('bmModalTitle').innerHTML = "Редактировать";
+            openBookmarkModal();
+        }
+
+        // ПРОГРЕСС
+        function updateProgress(percent) {
+            document.getElementById('progressBar').style.width = percent + '%';
+        }
+
+        function jumpToPosition(event) {
+            var container = document.getElementById('progressContainer');
+            var rect = container.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var percent = (x / rect.width) * 100;
+            updateProgress(Math.round(percent));
+        }
+
+        // КЛАВИАТУРА
+        document.onkeydown = function(e) {
+            if (e.keyCode == 39) { console.log("След. страница"); }
+            if (e.keyCode == 37) { console.log("Пред. страница"); }
+        };
+    </script>
+</body>
+</html>
