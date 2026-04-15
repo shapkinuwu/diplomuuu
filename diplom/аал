@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Spectra — Чтение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            /* ЦВЕТА */
+            --primary-h: 238; --primary-s: 83%; --primary-l: 67%;
+            --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+            --primary-light: hsl(var(--primary-h), 85%, 75%);
+            --primary-glow: 0 0 30px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.3);
+            --bg: #faf7f2;
+            --surface: hsla(0, 0%, 100%, 0.8);
+            --surface-solid: #ffffff;
+            --surface-hover: #f3f4f6;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --text-tertiary: #7f8c8d;
+            --border: #e6e0d4;
+            --border-light: rgba(0,0,0,0.05);
+            --shadow-xl: 0 30px 48px -12px rgba(0,0,0,0.1);
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --header-height: 70px;
+            --gradient-primary: linear-gradient(145deg, hsl(238, 83%, 67%), hsl(258, 70%, 65%));
+            --success: #10b981;
+            --danger: #ef4444;
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body[data-theme="dark"] {
+            --bg: #1a1e24; --text-primary: #b3c5d7; --surface-solid: #232a33; --border: #3a4450;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ХЕДЕР */
+        .reader-header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--surface); backdrop-filter: blur(20px);
+            height: var(--header-height);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 2rem; border-bottom: 1px solid var(--border-light);
+        }
+
+        .book-info { flex: 1; margin: 0 1rem; }
+        .book-title-header { font-weight: 700; display: block; }
+        .book-chapter { font-size: 0.8rem; color: var(--text-tertiary); }
+
+        .btn-icon {
+            width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-light);
+            background: var(--surface-solid); cursor: pointer; transition: var(--transition-bounce);
+        }
+        .btn-icon:hover { background: var(--gradient-primary); color: white; transform: translateY(-2px); }
+
+        /* КОНТЕНТ */
+        .reader-container { padding: 2rem 1rem; }
+        .reader-content {
+            margin: 0 auto;
+            max-width: var(--reading-width, 800px); /* Регулируемая ширина контента */
+            transition: max-width 0.3s ease;
+        }
+
+        .book-content {
+            font-size: var(--reading-font-size, 18px);
+            line-height: 1.6;
+            text-align: var(--reading-align, justify);
+        }
+
+        /* ИМИТАЦИЯ ДВУХ СТРАНИЦ */
+        .book-content.two-columns {
+            column-count: 2;
+            column-gap: 40px;
+            column-rule: 1px solid var(--border-light);
+        }
+
+        .book-content h1 { font-size: 2.5em; margin-bottom: 1rem; }
+        .book-content p { margin-bottom: 1.2rem; }
+
+        /* ПАНЕЛИ (Общее) */
+        .side-panel {
+            position: fixed; top: var(--header-height); width: 350px;
+            height: calc(100vh - var(--header-height));
+            background: var(--surface-solid); border-right: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl); z-index: 150; transition: left 0.4s, right 0.4s;
+        }
+
+        /* Настройки (справа) */
+        .settings-panel { right: -400px; border-left: 1px solid var(--border-light); border-right: none; }
+        .settings-panel.open { right: 0; }
+
+        /* Закладки (слева) */
+        .bookmark-panel { left: -400px; }
+        .bookmark-panel.open { left: 0; }
+
+        /* Комментарии (теперь слева) */
+        .comments-panel { left: -400px; display: flex; flex-direction: column; }
+        .comments-panel.open { left: 0; }
+
+        .panel-header { padding: 1.5rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
+        .panel-content { padding: 1.5rem; overflow-y: auto; flex: 1; }
+
+        /* НАСТРОЙКИ СТИЛИ */
+        .settings-section { margin-bottom: 1.5rem; background: var(--surface-hover); padding: 1rem; border-radius: var(--radius-lg); }
+        .settings-row { margin: 10px 0; display: flex; flex-direction: column; gap: 5px; }
+        .range-slider { width: 100%; cursor: pointer; }
+        .settings-options { display: flex; gap: 5px; }
+        .settings-option { padding: 5px 15px; border-radius: 20px; border: 1px solid var(--border); background: white; cursor: pointer; font-size: 0.8rem; }
+        .settings-option.active { background: var(--gradient-primary); color: white; border-color: transparent; }
+
+        /* ЗАКЛАДКИ И КОММЕНТАРИИ СТИЛИ */
+        .bookmark-item, .comment-item {
+            background: var(--surface-hover); padding: 1rem; border-radius: 12px; margin-bottom: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        .item-actions { margin-top: 8px; display: flex; gap: 10px; }
+        .btn-tiny { background: none; border: none; font-size: 0.7rem; color: var(--text-tertiary); cursor: pointer; }
+        .btn-tiny:hover { color: var(--primary); }
+        .btn-tiny.danger:hover { color: var(--danger); }
+
+        /* ВВОД КОММЕНТАРИЯ */
+        .comment-input-area { padding: 1rem; border-top: 1px solid var(--border-light); }
+        .comment-input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); resize: none; font-family: inherit; }
+        .comment-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; font-size: 0.75rem; }
+
+        /* МОДАЛКА */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 2rem; border-radius: var(--radius-lg); width: 90%; max-width: 400px; }
+
+        /* ПРОГРЕСС */
+        .reading-progress { height: 4px; background: var(--border-light); cursor: pointer; }
+        .progress-bar { height: 100%; background: var(--gradient-primary); width: 0%; transition: 0.3s; }
+
+        /* УВЕДОМЛЕНИЕ */
+        .notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--surface-solid); padding: 10px 20px; border-radius: 50px; box-shadow: var(--shadow-xl); display: none; z-index: 2000; border-left: 5px solid var(--success); }
+    </style>
+</head>
+<body data-theme="light">
+
+    <header class="reader-header">
+        <button class="btn-icon" onclick="togglePanel('bookmarkPanel')"><i class="fas fa-bookmark"></i></button>
+        <div class="book-info">
+            <span class="book-title-header">Название книги 1</span>
+            <span class="book-chapter">Глава 1: Пробуждение</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn-icon" onclick="togglePanel('commentsPanel')"><i class="fas fa-comment"></i></button>
+            <button class="btn-icon" onclick="togglePanel('settingsPanel')"><i class="fas fa-sliders-h"></i></button>
+        </div>
+    </header>
+
+    <div class="reading-progress" onclick="jumpProgress(event)">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="reader-container">
+        <div class="reader-content">
+            <div class="book-content" id="bookContent">
+                <h1>Глава 1</h1>
+                <p>Ветер тихо шелестел листвой старых кленов, растущих вдоль университетской аллеи. Алексей стоял у окна библиотеки и смотрел, как первые осенние листья медленно кружатся в воздухе. В руках он держал потрепанный том стихов — книга, доставшаяся ему от деда.</p>
+                <p>— Вы тоже любите этот период? — раздался тихий голос за спиной. Алексей обернулся. Перед ним стояла девушка, которую он раньше никогда не видел в этих залах.</p>
+                <p>Их разговор продолжился до самого вечера. Библиотекарь уже дважды намекала, что пора закрывать, но они не замечали времени. Так началась история, которую Алексей будет вспоминать много лет спустя. Это было время надежд и больших перемен, когда каждое слово казалось весомым, а каждый взгляд — обещанием чего-то несбыточного.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ НАСТРОЕК -->
+    <div id="settingsPanel" class="side-panel settings-panel">
+        <div class="panel-header">
+            <h3>Настройки</h3>
+            <button class="btn-tiny" onclick="togglePanel('settingsPanel')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="panel-content">
+            <div class="settings-section">
+                <div class="settings-row">
+                    <span>Размер шрифта: <b id="fontSizeVal">18px</b></span>
+                    <input type="range" class="range-slider" min="12" max="42" value="18" oninput="updateFontSize(this.value)">
+                </div>
+                <div class="settings-row">
+                    <span>Ширина текста: <b id="widthVal">800px</b></span>
+                    <input type="range" class="range-slider" min="400" max="1200" value="800" oninput="updateWidth(this.value)">
+                </div>
+                <div class="settings-row">
+                    <span>Колонки (вид страниц)</span>
+                    <div class="settings-options">
+                        <button class="settings-option active" id="col1" onclick="setCols(1)">Одна</button>
+                        <button class="settings-option" id="col2" onclick="setCols(2)">Две</button>
+                    </div>
+                </div>
+                <div class="settings-row">
+                    <span>Выравнивание</span>
+                    <div class="settings-options">
+                        <button class="settings-option" onclick="setAlign('left')">Лево</button>
+                        <button class="settings-option active" onclick="setAlign('justify')">Ширина</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ ЗАКЛАДОК -->
+    <div id="bookmarkPanel" class="side-panel bookmark-panel">
+        <div class="panel-header">
+            <h3>Закладки</h3>
+            <button class="settings-option" onclick="openBookmarkModal()">+</button>
+        </div>
+        <div class="panel-content" id="bookmarkList">
+            <!-- Закладки -->
+        </div>
+    </div>
+
+    <!-- ПАНЕЛЬ КОММЕНТАРИЕВ -->
+    <div id="commentsPanel" class="side-panel comments-panel">
+        <div class="panel-header">
+            <h3>Комментарии</h3>
+        </div>
+        <div class="panel-content" id="commentsList">
+            <!-- Комменты -->
+        </div>
+        <div class="comment-input-area">
+            <textarea id="commentInput" class="comment-input" placeholder="Ваш комментарий..." maxlength="300" oninput="updateCharCount()"></textarea>
+            <div class="comment-meta">
+                <span id="charCount">0 / 300</span>
+                <button class="settings-option active" onclick="addComment()">Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА ЗАКЛАДОК -->
+    <div id="bookmarkModal" class="modal">
+        <div class="modal-content">
+            <h3 id="bmModalTitle">Новая закладка</h3>
+            <br>
+            <input type="text" id="bmName" class="comment-input" placeholder="Название закладки">
+            <br><br>
+            <div style="display: flex; gap: 10px;">
+                <button class="settings-option active" onclick="saveBookmark()">Сохранить</button>
+                <button class="settings-option" onclick="closeBookmarkModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">Готово!</div>
+
+    <script>
+        let currentEditingBookmark = null;
+
+        // ========== УПРАВЛЕНИЕ ПАНЕЛЯМИ ==========
+        function togglePanel(id) {
+            const panels = ['settingsPanel', 'bookmarkPanel', 'commentsPanel'];
+            panels.forEach(p => {
+                if(p === id) document.getElementById(p).classList.toggle('open');
+                else document.getElementById(p).classList.remove('open');
+            });
+        }
+
+        // ========== НАСТРОЙКИ ТЕКСТА ==========
+        function updateFontSize(val) {
+            document.getElementById('bookContent').style.fontSize = val + 'px';
+            document.getElementById('fontSizeVal').innerText = val + 'px';
+        }
+
+        function updateWidth(val) {
+            document.querySelector('.reader-content').style.setProperty('--reading-width', val + 'px');
+            document.getElementById('widthVal').innerText = val + 'px';
+        }
+
+        function setCols(num) {
+            const content = document.getElementById('bookContent');
+            if(num === 2) {
+                content.classList.add('two-columns');
+                document.getElementById('col2').classList.add('active');
+                document.getElementById('col1').classList.remove('active');
+            } else {
+                content.classList.remove('two-columns');
+                document.getElementById('col1').classList.add('active');
+                document.getElementById('col2').classList.remove('active');
+            }
+        }
+
+        function setAlign(type) {
+            document.getElementById('bookContent').style.textAlign = type;
+            showNotification("Выравнивание изменено");
+        }
+
+        // ========== СТРЕЛКИ КЛАВИАТУРЫ ==========
+        document.addEventListener('keydown', (e) => {
+            if(e.key === "ArrowRight") window.scrollBy({top: window.innerHeight * 0.8, behavior: 'smooth'});
+            if(e.key === "ArrowLeft") window.scrollBy({top: -window.innerHeight * 0.8, behavior: 'smooth'});
+        });
+
+        // ========== ЗАКЛАДКИ ==========
+        function openBookmarkModal() {
+            document.getElementById('bookmarkModal').style.display = 'flex';
+            document.getElementById('bmModalTitle').innerText = "Новая закладка";
+        }
+
+        function closeBookmarkModal() {
+            document.getElementById('bookmarkModal').style.display = 'none';
+            document.getElementById('bmName').value = "";
+            currentEditingBookmark = null;
+        }
+
+        function saveBookmark() {
+            const name = document.getElementById('bmName').value || "Без названия";
+            const list = document.getElementById('bookmarkList');
+
+            if(currentEditingBookmark) {
+                currentEditingBookmark.querySelector('.bm-text').innerText = name;
+            } else {
+                const id = Date.now();
+                const div = document.createElement('div');
+                div.className = 'bookmark-item';
+                div.id = 'bm-' + id;
+                div.innerHTML = `
+                    <span class="bm-text">${name}</span>
+                    <div class="item-actions">
+                        <button class="btn-tiny" onclick="editBookmark('${id}')">Ред.</button>
+                        <button class="btn-tiny danger" onclick="deleteItem('bm-${id}')">Удалить</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            }
+            closeBookmarkModal();
+            showNotification("Закладка сохранена");
+        }
+
+        function editBookmark(id) {
+            currentEditingBookmark = document.getElementById('bm-' + id);
+            document.getElementById('bmName').value = currentEditingBookmark.querySelector('.bm-text').innerText;
+            document.getElementById('bmModalTitle').innerText = "Редактировать";
+            document.getElementById('bookmarkModal').style.display = 'flex';
+        }
+
+        // ========== КОММЕНТАРИИ (Цензура и Лимиты) ==========
+        function updateCharCount() {
+            const len = document.getElementById('commentInput').value.length;
+            document.getElementById('charCount').innerText = `${len} / 300`;
+        }
+
+        function addComment() {
+            const input = document.getElementById('commentInput');
+            let text = input.value.trim();
+
+            if(!text) return;
+
+            // 1. Запрет ссылок
+            const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/gi;
+            if(urlPattern.test(text)) {
+                text = text.replace(urlPattern, "[ссылки запрещены]");
+            }
+
+            // 2. Авто-цензура (базовая имитация)
+            const badWords = ["дурак", "спам", "плохоеслово"];
+            badWords.forEach(word => {
+                const reg = new RegExp(word, "gi");
+                text = text.replace(reg, "***");
+            });
+
+            const list = document.getElementById('commentsList');
+            const id = Date.now();
+            const div = document.createElement('div');
+            div.className = 'comment-item';
+            div.id = 'com-' + id;
+            div.innerHTML = `
+                <div style="font-size:0.8rem; font-weight:bold; margin-bottom:5px;">Пользователь</div>
+                <div>${text}</div>
+                <div class="item-actions">
+                    <button class="btn-tiny" onclick="reportComment()">Пожаловаться</button>
+                    <button class="btn-tiny danger" onclick="deleteItem('com-${id}')">Удалить</button>
+                </div>
+            `;
+            list.prepend(div);
+            input.value = "";
+            updateCharCount();
+            showNotification("Комментарий добавлен");
+        }
+
+        function reportComment() {
+            showNotification("Жалоба отправлена модераторам");
+        }
+
+        // ========== ОБЩЕЕ ==========
+        function deleteItem(id) {
+            if(confirm("Удалить?")) {
+                document.getElementById(id).remove();
+                showNotification("Удалено");
+            }
+        }
+
+        function showNotification(msg) {
+            const n = document.getElementById('notification');
+            n.innerText = msg;
+            n.style.display = 'block';
+            setTimeout(() => n.style.display = 'none', 2000);
+        }
+
+        function jumpProgress(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percent = (x / rect.width) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+            showNotification(`Переход: ${Math.round(percent)}%`);
+        }
+
+        // Следим за прокруткой для бара
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
